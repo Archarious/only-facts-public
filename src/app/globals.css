@@ -1,26 +1,293 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One:wght@400&display=swap');
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --spacing: 2px;
+
+  --font-serif: "Geologica", "sans-serif";
+  --font-dela-gothic: "Dela Gothic One", "cursive";
+
+  /* --color-charcoal: #272C36; */    /* насыщенный тёмно-серый (чернильный) */
+  --color-charcoal: #202020    /* угольный */
+  --color-gray: #7C879B;        /* серо-синий */
+  --color-gray-bg: #D9D9D9;     /* светло-серый фон */
+  --color-silver: #F1EEEE;      /* серебристо-серый */
+  --color-turquoise: #2AC6F8;   /* яркий бирюзовый */
+  --color-blue: #426BF7;        /* насыщенный синий */
+  --color-gold: #FFA600;        /* золотой */
+  --color-green: #34EAB9;       /* мятно-зелёный */
+  --color-orange: #FFB03A;      /* оранжевый */
+  --color-red: #FE5A7D;         /* насыщенный кораллово-красный */
+  --color-red-accent: #DA3E22;  /* ярко-красный акцент */
+  --color-white: #FFFFFF;       /* белый */
+
+  --color-palette-charcoal-100: oklch(0.2435 0 0); /* угольный 100 */
+  --color-palette-charcoal-060: oklch(0.2435 0 0 / 60%); /* угольный 60 */
+
+  --color-palette-yellow-100: oklch(0.7945 0.1709 71.19); /* жёлтый 100 */
+  --color-palette-yellow-060: oklch(0.8649 0.1314 80.68); /* жёлтый 60  */
+  --color-palette-yellow-050: oklch(0.8649 0.1314 80.68); /* жёлтый 50  */
+  --color-palette-yellow-040: oklch(0.8649 0.1314 80.68); /* жёлтый 40  */
+
+  --color-palette-red-100: oklch(0.5921 0.1971 32.45); /* красный 100 */
+  --color-palette-red-060: oklch(0.732 0.1182 31.08); /* красный 60 */
+  --color-palette-red-050: oklch(0.5921 0.1971 32.45 / 50%); /* красный 50 */
+  --color-palette-red-040: oklch(0.732 0.1182 31.08 / 40% ); /* красный 40 */
+
+  --color-palette-aqua-120: oklch(0.647 0.118098 220.3527); /* аква 120 */
+  --color-palette-aqua-100: oklch(0.8184 0.0807 211.91); /* аква 100 */
+  --color-palette-aqua-060: oklch(0.801 0.0597 211.09); /* аква 60 */
+  --color-palette-aqua-050: oklch(0.801 0.0597 211.09 / 50%); /* аква 50 */
+  --color-palette-aqua-040: oklch(0.801 0.0597 211.09 / 40%); /* аква 40 */
+  --color-palette-aqua-030: oklch(0.907 0.0349 212.38); /* аква 30 */
+
+  --color-palette-blue-100: oklch(0.5406 0.1422 247.12); /* синий 100 */
+  --color-palette-blue-060: oklch(0.6671 0.109 239.27); /* синий 60 */
+  --color-palette-blue-050: oklch(0.5406 0.1422 247.12 / 50%); /* синий 50 */
+  --color-palette-blue-040: oklch(0.6671 0.109 239.27 / 40%); /* синий 40 */
+
+  --color-palette-grey-100: oklch(0.2702 0.0405 289.65 / 50%); /* серый 100 */
+  --color-palette-grey-050: oklch(0.2702 0.0405 289.65 / 30%); /* серый 50 */
+
+  --color-palette-white-100: oklch(1 0 0); /* белый 60 */
+  --color-palette-white-060: oklch(0.9688 0.0159 82.79); /* белый 60 */
+  --color-palette-white-050: oklch(1 0 0 / 50%); /* белый 50 */
+  --color-palette-white-040: oklch(1 0 0 / 40%); /* белый 40 */
+  --color-palette-white: var(--color-palette-white-100); /* Алиас на белый 100 */
+
+  --color-palette-black-100: oklch(0 0 0); /* чёрный 100 */
+  --color-palette-black: var(--color-palette-black-100); /* Алиас на чёрный 100 */
+
+  --color-palette-banana-100: oklch(0.9688 0.0159 82.79); /* банановый 100 */
+  --color-palette-banana-050: oklch(0.9244 0.064 83.08 / 50%); /* банановый 50 */
+  --color-palette-gold-100: oklch(0.9228 0.1586 100.8); /* золотой 100 */
+
+
+  /* --radius: 0.625rem; */
+  --radius: calc(var(--spacing) * 10);
+  --radius-xl: calc(var(--spacing) * 16);
+  --padding: calc(var(--spacing) * 10);
+  --chart-radius: 10px;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Брейкпоинты системы */
+  --sizes-tablet-min: 600px;
+  --sizes-landscape-min: 1024px;  
+  --sizes-desktop-min: 1361px;
+  
+  /* Автоматически вычисляемые max-width значения */
+  --sizes-mobile-max: calc(var(--sizes-tablet-min) - 1px);      /* 599px */
+  --sizes-tablet-max: calc(var(--sizes-landscape-min) - 1px);   /* 1023px */
+  --sizes-landscape-max: calc(var(--sizes-desktop-min) - 1px);  /* 1360px */
+
+  /* Система размеров - базовые переменные */
+  --sizes-gutter: 8px;
+  --sizes-window-width: 100vw;
+  
+  /* Desktop - базовая система (главная) */
+  --sizes-max-container-width: 952px;
+  --sizes-col-num: 24;
+  --sizes-left-pad: 0px;
+  --sizes-right-pad: 0px;
+  
+  /* Вычисление size-point для Desktop */
+  --size-point: calc((var(--sizes-max-container-width) - ((var(--sizes-col-num) - 1) * var(--sizes-gutter))) / var(--sizes-col-num));
+  
+  /* Производные размеры на основе size-point */
+  --size-point-2x: calc(var(--size-point) * 2 + var(--sizes-gutter));
+  --size-point-3x: calc(var(--size-point) * 3 + var(--sizes-gutter) * 2);
+  --size-point-4x: calc(var(--size-point) * 4 + var(--sizes-gutter) * 3);
+  --size-point-6x: calc(var(--size-point) * 6 + var(--sizes-gutter) * 5);
+  --size-point-8x: calc(var(--size-point) * 8 + var(--sizes-gutter) * 7);
+  --size-point-12x: calc(var(--size-point) * 12 + var(--sizes-gutter) * 11);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+/* Mobile: до var(--sizes-mobile-max) - 4 колонки, отступы 32px */
+@media (max-width: 599px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --sizes-col-num: 4;
+    --sizes-left-pad: 32px;
+    --sizes-right-pad: 32px;
+    
+    /* Динамическое вычисление size-point для мобильного */
+    --size-point: calc((var(--sizes-window-width) - var(--sizes-left-pad) - var(--sizes-right-pad) - ((var(--sizes-col-num) - 1) * var(--sizes-gutter))) / var(--sizes-col-num));
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Tablet Portrait: var(--sizes-tablet-min) до var(--sizes-tablet-max) - 16 колонок, отступы 36px */
+@media (min-width: 600px) and (max-width: 1023px) {
+  :root {
+    --sizes-col-num: 16;
+    --sizes-left-pad: 36px;
+    --sizes-right-pad: 36px;
+    
+    /* Динамическое вычисление size-point для планшета portrait */
+    --size-point: calc((var(--sizes-window-width) - var(--sizes-left-pad) - var(--sizes-right-pad) - ((var(--sizes-col-num) - 1) * var(--sizes-gutter))) / var(--sizes-col-num));
+  }
+}
+
+/* Tablet Landscape: var(--sizes-landscape-min) до var(--sizes-landscape-max) - 16 колонок, левое меню 290px, правый отступ 36px */
+@media (min-width: 1024px) and (max-width: 1360px) {
+  :root {
+    --sizes-col-num: 16;
+    --sizes-left-pad: 290px; /* левое меню */
+    --sizes-right-pad: 36px;
+    
+    /* Динамическое вычисление size-point для планшета landscape */
+    --size-point: calc((var(--sizes-window-width) - var(--sizes-left-pad) - var(--sizes-right-pad) - ((var(--sizes-col-num) - 1) * var(--sizes-gutter))) / var(--sizes-col-num));
+  }
+}
+
+/* Desktop: от var(--sizes-desktop-min) - 24 колонки, фиксированный контейнер 952px */
+@media (min-width: 1361px) {
+  :root {
+    --sizes-col-num: 24;
+    --sizes-max-container-width: 952px;
+    --sizes-left-pad: 0px;
+    --sizes-right-pad: 0px;
+    
+    /* Базовое вычисление size-point для Desktop (главное) */
+    --size-point: calc((var(--sizes-max-container-width) - ((var(--sizes-col-num) - 1) * var(--sizes-gutter))) / var(--sizes-col-num));
+  }
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-family-geologica: "Geologica", sans-serif;
+  --font-family-dela-gothic: "Dela Gothic One", cursive;
+  
+  /* Добавляем брейкпоинты в theme */
+  --sizes-tablet-min: var(--sizes-tablet-min);
+  --sizes-landscape-min: var(--sizes-landscape-min);
+  --sizes-desktop-min: var(--sizes-desktop-min);
+  --sizes-mobile-max: var(--sizes-mobile-max);
+  --sizes-tablet-max: var(--sizes-tablet-max);
+  --sizes-landscape-max: var(--sizes-landscape-max);
+  
+  /* Добавляем size-point переменные в theme */
+  --size-point: var(--size-point);
+  --size-point-2x: var(--size-point-2x);
+  --size-point-3x: var(--size-point-3x);
+  --size-point-4x: var(--size-point-4x);
+  --size-point-6x: var(--size-point-6x);
+  --size-point-8x: var(--size-point-8x);
+  --size-point-12x: var(--size-point-12x);
+  --sizes-gutter: var(--sizes-gutter);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden; /* Предотвращаем горизонтальный скролл глобально */
+  }
+  
+  /* Стили для активного состояния TabsTrigger в Selectors */
+  [data-slot="tabs-trigger"][data-state="active"] {
+    background-color: var(--color-red-accent) !important;
+  }
 }

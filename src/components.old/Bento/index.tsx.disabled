@@ -1,0 +1,20 @@
+'use client';
+
+import React from 'react';
+
+const BentoGrid: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <div className="
+      grid
+      gap-1
+      grid-cols-8
+      sm:grid-cols-16
+      lg:grid-cols-24
+      bg-[linear-gradient(90deg, #e74c3c 0%, #e74c3c 25%, #2ecc71 25%, #2ecc71 50%, #3498db 50%, #3498db 75%, #f1c40f 75%, #f1c40f 100%)]
+    ">
+      {children}
+    </div>
+  );
+};
+
+export default BentoGrid;

@@ -1,0 +1,14 @@
+'use client';
+
+import React from 'react';
+
+// max 946 px width left margin 24px
+const Article: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <div className="max-w-[952px] mx-auto px-4 sm:px-6 lg:px-8">
+      {children}
+    </div>
+  );
+}
+
+export default Article;
