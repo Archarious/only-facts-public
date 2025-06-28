@@ -8,6 +8,9 @@ import { ChevronDown } from '@/lib/icons'
 export interface CardProps {
   width: number
   height: number
+  title?: string | React.ReactNode
+  titleSize?: number
+  subtitle?: string
   colorScheme?: ColorSchemeName | string
   outline?: boolean
   className?: string
@@ -19,6 +22,9 @@ export interface CardProps {
 function Card({
   width,
   height,
+  title,
+  titleSize = 20,
+  subtitle,
   colorScheme = 'red-white',
   outline = false,
   className,
@@ -61,6 +67,28 @@ function Card({
     paddingBottom: isExpandable || tags.length ? '20px' : '0',
   }
 
+  // Функция для рендеринга title
+  const renderTitle = () => {
+    if (!title) return null
+    
+    // Если title - строка, используем h3
+    if (typeof title === 'string') {
+      return (
+        <h3
+          className={cn(
+            `text-[${titleSize}px]`,
+            `color-${scheme['title-text']}`,
+          )}
+        >
+          {title}
+        </h3>
+      )
+    }
+    
+    // Если title - React компонент, рендерим как есть
+    return title
+  }
+
   return (
     <div
       className={cn(
@@ -70,12 +98,24 @@ function Card({
       style={cardStyle}
       {...props}
     >
-      {/* Основная область контента - центральная ячейка (row 2, col 2) */}
+      {/* Основная область контента - центральная ячейка */}
       <div 
-        className="overflow-hidden"
-        style={{ gridRow: 2, gridColumn: 2 }}
+        className="flex flex-col justify-between h-full row-start-2 col-start-2"
       >
-        {children}
+        <div className="flex flex-col">
+          {renderTitle()}
+          {subtitle && <p
+            className={cn(
+              'mt-4',
+              `color-${scheme['body-text']}`
+            )}>
+              {subtitle}
+            </p>
+          }
+        </div>
+        <div className="h-full">
+          {children}
+        </div>
       </div>
 
       {/* Правая колонка для перекрытия overflow - правая средняя ячейка (row 2, col 3) */}

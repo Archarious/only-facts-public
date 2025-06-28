@@ -19,7 +19,7 @@ export const delaGothicOne = Dela_Gothic_One({
 
 export const decorators = [
   (Story) => (
-    <div className={`${geologica.className} `}>
+    <div className={`${geologica.className}`}>
       <Story />
     </div>
   ),

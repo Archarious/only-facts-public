@@ -3,13 +3,15 @@ import { cn } from "@/lib/utils"
 
 interface TypographyProps {
   variant: 'h1' | 'h2' | 'h3' | 'paragraph' | 'caption'
+  color?: string
   className?: string
   children: React.ReactNode
   as?: React.ElementType
 }
 
 function Typography({ 
-  variant, 
+  variant,
+  color='var(--color-palette-black-100)',
   className, 
   children, 
   as, 
@@ -18,11 +20,11 @@ function Typography({
   const Component = as || getDefaultComponent(variant)
   
   const variantStyles = {
-    h1: "font-normal text-[64px] leading-auto text-black p-0 m-0",
-    h2: "font-normal text-[28px] leading-auto text-black p-0 m-0",
-    h3: "font-normal text-[20px] leading-[24px] text-black p-0 m-0", 
-    paragraph: "font-normal text-[18px] leading-auto text-black p-0 m-0",
-    caption: "font-normal text-[14px] leading-[100%] text-black p-0 m-0"
+    h1: "font-normal text-[64px] leading-auto p-0 m-0",
+    h2: "font-normal text-[28px] leading-auto p-0 m-0",
+    h3: "font-(family-name:--font-dela-gothic) text-[20px] leading-[24px] p-0 m-0", 
+    paragraph: "font-normal text-[18px] leading-auto p-0 m-0",
+    caption: "font-normal text-[14px] leading-[100%] p-0 m-0"
   }
 
   const fontFamily = {
@@ -40,6 +42,7 @@ function Typography({
         fontFamily[variant],
         className
       )}
+      style={{ color }}
       {...props}
     >
       {children}
@@ -60,6 +63,7 @@ function getDefaultComponent(variant: TypographyProps['variant']) {
 
 // Специализированные компоненты для удобства использования
 interface BaseTypographyProps {
+  color?: string
   className?: string
   children: React.ReactNode
   as?: React.ElementType
@@ -110,11 +114,12 @@ function CaptionContent({ children, className, as, ...props }: CaptionContentPro
   )
 }
 
-function TypographyH1({ className, children, as, ...props }: BaseTypographyProps) {
+function TypographyH1({ className, color, children, as, ...props }: BaseTypographyProps) {
   return (
     <Typography 
       variant="h1" 
-      className={className} 
+      color={color}
+      className={className}
       as={as}
       {...props}
     >
@@ -123,10 +128,11 @@ function TypographyH1({ className, children, as, ...props }: BaseTypographyProps
   )
 }
 
-function TypographyH2({ className, children, as, ...props }: BaseTypographyProps) {
+function TypographyH2({ className, color, children, as, ...props }: BaseTypographyProps) {
   return (
     <Typography 
       variant="h2" 
+      color={color}
       className={className} 
       as={as}
       {...props}
@@ -136,11 +142,12 @@ function TypographyH2({ className, children, as, ...props }: BaseTypographyProps
   )
 }
 
-function TypographyH3({ className, children, as, ...props }: BaseTypographyProps) {
+function TypographyH3({ className, color, children, as, ...props }: BaseTypographyProps) {
   return (
     <Typography 
       variant="h3" 
-      className={className} 
+      color={color}
+      className={className}
       as={as}
       {...props}
     >
@@ -149,11 +156,12 @@ function TypographyH3({ className, children, as, ...props }: BaseTypographyProps
   )
 }
 
-function TypographyParagraph({ className, children, as, ...props }: BaseTypographyProps) {
+function TypographyParagraph({ className, color, children, as, ...props }: BaseTypographyProps) {
   return (
     <Typography 
       variant="paragraph" 
-      className={className} 
+      color= {color}
+      className={className}
       as={as}
       {...props}
     >
