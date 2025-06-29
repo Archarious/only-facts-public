@@ -24,8 +24,8 @@ export function TwoColorIcon({
     return null;
   }
 
-  const primaryColor = currentScheme['primary-100'];
-  const accentColor = currentScheme['accent-100'];
+  const primaryColor = currentScheme['primary'];
+  const accentColor = currentScheme['accent'];
 
   return (
     <svg

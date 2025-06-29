@@ -49,19 +49,19 @@ function ColorSchemeDemo({ className }: ColorSchemeDemoProps) {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
-        {renderColorBox('Primary 100', 'primary-100')}
-        {renderColorBox('Primary 60', 'primary-60')}
-        {renderColorBox('Accent 100', 'accent-100')}
-        {renderColorBox('Accent 60', 'accent-60')}
-        {renderColorBox('Body Text', 'body-text')}
-        {renderColorBox('Body BG', 'body-background')}
+        {renderColorBox('Primary 100', 'primary')}
+        {renderColorBox('Primary 60', 'primary-2')}
+        {renderColorBox('Accent 100', 'accent')}
+        {renderColorBox('Accent 60', 'accent-2')}
+        {renderColorBox('Body Text', 'main-text')}
+        {renderColorBox('Body BG', 'main-bg')}
         {renderColorBox('Title Text', 'title-text')}
         {renderColorBox('Icon BG', 'icon-bg')}
         {renderColorBox('Icon Fill', 'icon-fill')}
         {renderColorBox('Tag BG', 'tag-bg')}
         {renderColorBox('Tag Text', 'tag-text')}
-        {renderColorBox('Filter Active', 'filter-active-bg')}
-        {renderColorBox('Filter Inactive', 'filter-inactive-bg')}
+        {renderColorBox('Filter Active', 'active-bg')}
+        {renderColorBox('Filter Inactive', 'inactive-bg')}
       </div>
 
       <div className="space-y-4">
@@ -69,8 +69,8 @@ function ColorSchemeDemo({ className }: ColorSchemeDemoProps) {
         <div 
           className="p-6 rounded-lg border"
           style={{ 
-            backgroundColor: currentScheme['body-background'],
-            color: currentScheme['body-text']
+            backgroundColor: currentScheme['main-bg'],
+            color: currentScheme['main-text']
           }}
         >
           <h4 
@@ -122,7 +122,7 @@ function ColorSchemeDemo({ className }: ColorSchemeDemoProps) {
             <button 
               className="px-4 py-2 rounded text-sm font-medium"
               style={{ 
-                backgroundColor: currentScheme['filter-active-bg'],
+                backgroundColor: currentScheme['active-bg'],
                 color: currentScheme['icon-fill']
               }}
             >
@@ -131,8 +131,8 @@ function ColorSchemeDemo({ className }: ColorSchemeDemoProps) {
             <button 
               className="px-4 py-2 rounded text-sm font-medium"
               style={{ 
-                backgroundColor: currentScheme['filter-inactive-bg'],
-                color: currentScheme['body-text']
+                backgroundColor: currentScheme['inactive-bg'],
+                color: currentScheme['main-text']
               }}
             >
               Неактивный фильтр
@@ -151,8 +151,8 @@ const scheme = getColorScheme(colorScheme)
 
 // Применение стилей
 style={{
-  backgroundColor: scheme['primary-100'],
-  color: scheme['body-text']
+  backgroundColor: scheme['primary'],
+  color: scheme['main-text']
 }}`}
         </pre>
       </div>

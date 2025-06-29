@@ -122,7 +122,7 @@ function Hero({
           <Card
             width={8}
             height={3}
-            colorScheme="gray-aqua"
+            colorScheme="aqua-white"
             outline={false}
             className="cursor-pointer hover:opacity-90 transition-opacity duration-200"
           >
@@ -140,7 +140,7 @@ function Hero({
           <Card
             width={8}
             height={3}
-            colorScheme="banana"
+            colorScheme="yellow-red"
             outline={false}
             className="cursor-pointer hover:opacity-90 transition-opacity duration-200"
           >
@@ -158,7 +158,7 @@ function Hero({
           <Card
             width={8}
             height={2}
-            colorScheme="blue-aqua"
+            colorScheme="gray-blue"
             outline={false}
             className="cursor-pointer hover:opacity-90 transition-opacity duration-200"
           >

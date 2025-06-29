@@ -25,8 +25,8 @@ function ThemeableComponent({
     <div 
       className={cn("p-6 rounded-lg border", className)}
       style={{ 
-        backgroundColor: scheme['body-background'],
-        borderColor: scheme['primary-60']
+        backgroundColor: scheme['main-bg'],
+        borderColor: scheme['primary-2']
       }}
     >
       <div className="flex items-start gap-2 mb-4">
@@ -50,7 +50,7 @@ function ThemeableComponent({
           
           <p 
             className="text-sm leading-relaxed"
-            style={{ color: scheme['body-text'] }}
+            style={{ color: scheme['main-text'] }}
           >
             {content}
           </p>
@@ -78,7 +78,7 @@ function ThemeableComponent({
         <button 
           className="px-4 py-2 rounded text-sm font-medium transition-opacity hover:opacity-80"
           style={{ 
-            backgroundColor: scheme['primary-100'],
+            backgroundColor: scheme['primary'],
             color: scheme['icon-fill']
           }}
         >
@@ -87,8 +87,8 @@ function ThemeableComponent({
         <button 
           className="px-4 py-2 rounded text-sm font-medium transition-opacity hover:opacity-80"
           style={{ 
-            backgroundColor: scheme['accent-100'],
-            color: scheme['body-text']
+            backgroundColor: scheme['accent'],
+            color: scheme['main-text']
           }}
         >
           Дополнительное

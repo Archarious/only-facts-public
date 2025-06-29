@@ -61,7 +61,7 @@ const Ethn2 = ({ colorScheme = 'gray-aqua' }: Ethn2Props) => {
                       y={y+20}
                       textAnchor="middle"
                       fontSize={12}
-                      fill={currentScheme['body-text']}
+                      fill={currentScheme['main-text']}
                       fontWeight={hoveredIndex === index ? "bold" : "normal"}
                     >
                       {payload.value}
@@ -75,7 +75,7 @@ const Ethn2 = ({ colorScheme = 'gray-aqua' }: Ethn2Props) => {
               <Bar 
                 dataKey="upper" 
                 radius={[chartRadius, chartRadius, chartRadius, chartRadius]}
-                fill={currentScheme['accent-100']}
+                fill={currentScheme['accent']}
               >
                 <LabelList 
                   dataKey="total" 
@@ -87,7 +87,7 @@ const Ethn2 = ({ colorScheme = 'gray-aqua' }: Ethn2Props) => {
                         y={15}
                         textAnchor="middle"
                         fontSize={12}
-                        fill={currentScheme['body-text']}
+                        fill={currentScheme['main-text']}
                         fontWeight="500"
                       >
                         {value}
@@ -98,8 +98,8 @@ const Ethn2 = ({ colorScheme = 'gray-aqua' }: Ethn2Props) => {
                 {corruptionData.map((entry, index) => (
                   <Cell 
                     key={`cell-${index}`} 
-                    fill={hoveredIndex === null ? currentScheme['accent-100'] : 
-                          hoveredIndex === index ? currentScheme['accent-100'] : currentScheme['accent-60']}
+                    fill={hoveredIndex === null ? currentScheme['accent'] : 
+                          hoveredIndex === index ? currentScheme['accent'] : currentScheme['accent-2']}
                     onMouseEnter={() => setHoveredIndex(index)}
                   />
                 ))}
@@ -109,13 +109,13 @@ const Ethn2 = ({ colorScheme = 'gray-aqua' }: Ethn2Props) => {
               <Bar 
                 dataKey="lower" 
                 radius={[chartRadius, chartRadius, chartRadius, chartRadius]}
-                fill={currentScheme['primary-100']}
+                fill={currentScheme['primary']}
               >
                 {corruptionData.map((entry, index) => (
                   <Cell 
                     key={`cell-${index}`} 
-                    fill={hoveredIndex === null ? currentScheme['primary-100'] : 
-                          hoveredIndex === index ? currentScheme['primary-100'] : currentScheme['primary-60']}
+                    fill={hoveredIndex === null ? currentScheme['primary'] : 
+                          hoveredIndex === index ? currentScheme['primary'] : currentScheme['primary-2']}
                     onMouseEnter={() => setHoveredIndex(index)}
                   />
                 ))}

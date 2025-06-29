@@ -57,7 +57,7 @@ const ROI1 = ({ colorScheme = 'red-aqua' }: ROI1Props) => {
                       y={y+20}
                       textAnchor="middle"
                       fontSize={12}
-                      fill={currentScheme['body-text']}
+                      fill={currentScheme['main-text']}
                       fontWeight={hoveredIndex === index ? "bold" : "normal"}
                     >
                       {payload.value}
@@ -80,7 +80,7 @@ const ROI1 = ({ colorScheme = 'red-aqua' }: ROI1Props) => {
                         y={15}
                         textAnchor="middle"
                         fontSize={12}
-                        fill={currentScheme['body-text']}
+                        fill={currentScheme['main-text']}
                         fontWeight={hoveredIndex === index ? "bold" : "500"}
                       >
                         {value}
@@ -91,7 +91,7 @@ const ROI1 = ({ colorScheme = 'red-aqua' }: ROI1Props) => {
                 {roiData.map((entry, index) => (
                   <Cell 
                     key={`cell-${index}`} 
-                    fill={hoveredIndex === index ? currentScheme['primary-100'] : currentScheme['accent-100']}
+                    fill={hoveredIndex === index ? currentScheme['primary'] : currentScheme['accent']}
                     onMouseEnter={() => setHoveredIndex(index)}
                   />
                 ))}

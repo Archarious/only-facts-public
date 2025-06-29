@@ -50,15 +50,15 @@ function Card({
     
     // Border внутренний (не влияет на размеры)
     boxSizing: 'border-box',
-    border: `1px solid ${scheme['body-background']}`,
+    border: `1px solid ${scheme['main-bg']}`,
     
     // Фон зависит от outline
-    backgroundColor: outline ? 'white' : scheme['body-background'],
-    color: scheme['body-text'],
+    backgroundColor: outline ? 'white' : scheme['main-bg'],
+    color: scheme['main-text'],
   }
 
   const overlayStyle: React.CSSProperties = {
-    background: `linear-gradient(to right, transparent, ${outline ? 'white' : scheme['body-background']})`,
+    background: `linear-gradient(to right, transparent, ${outline ? 'white' : scheme['main-bg']})`,
   }
 
   const footerStyle: React.CSSProperties = {
@@ -93,6 +93,7 @@ function Card({
     <div
       className={cn(
         "overflow-hidden",
+        'select-none',
         className
       )}
       style={cardStyle}
@@ -107,7 +108,7 @@ function Card({
           {subtitle && <p
             className={cn(
               'mt-4',
-              `color-${scheme['body-text']}`
+              `color-${scheme['main-text']}`
             )}>
               {subtitle}
             </p>

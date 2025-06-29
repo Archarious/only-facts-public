@@ -5,6 +5,7 @@ export {
   TypographyH3, 
   TypographyParagraph,
   CaptionTitle,
-  CaptionContent
+  CaptionContent,
+  DisclosureTitle,
 } from './Typography'
 export type { TypographyProps, BaseTypographyProps, CaptionTitleProps, CaptionContentProps } from './Typography'

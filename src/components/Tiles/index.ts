@@ -7,6 +7,7 @@ export { Ethn3 } from './Ethn-3';
 export { Ethn4 } from './Ethn-4';
 export { Ethn5 } from './Ethn-5';
 export { Regulators } from './Regulators';
+export { Bubbles } from './Bubbles';
 
 export type { ROI1Props } from './ROI-1';
 export type { ROI2Props } from './ROI-2';
@@ -17,3 +18,4 @@ export type { Ethn3Props } from './Ethn-3';
 export type { Ethn4Props } from './Ethn-4';
 export type { Ethn5Props } from './Ethn-5';
 export type { RegulatorsProps } from './Regulators';
+export type { BubblesProps } from './Bubbles';

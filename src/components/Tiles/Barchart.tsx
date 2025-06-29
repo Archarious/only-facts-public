@@ -75,7 +75,7 @@ const Barchart = ({
     return () => {
       resizeObserver.disconnect();
     };
-  }, [data.length]); // Добавляем data.length в зависимости
+  }, [data.length]);
 
   // Пересчитываем ширину баров при изменении данных
   useEffect(() => {
@@ -86,9 +86,13 @@ const Barchart = ({
   }, [data.length, containerWidth]);
 
   // Создаем title компонент для Card
-  const titleComponent = title ? (
-    <TypographyH3 color={currentScheme['title-text']}>{title}</TypographyH3>
-  ) : undefined;
+  const titleComponent = title
+  ? (<TypographyH3
+      color={currentScheme['title-text']}
+    >
+      {title}
+    </TypographyH3>) 
+  : undefined;
 
   return (
     <Card
@@ -125,7 +129,7 @@ const Barchart = ({
                     y={y+20}
                     textAnchor="middle"
                     fontSize={12}
-                    fill={currentScheme['body-text']}
+                    fill={currentScheme['main-text']}
                     fontWeight={data[index]?.accent ? 'bold' : 'normal'}
                     >
                     {payload.value}
@@ -149,7 +153,7 @@ const Barchart = ({
                       y={15}
                       textAnchor="middle"
                       fontSize={12}
-                      fill={currentScheme['body-text']}
+                      fill={currentScheme['main-text']}
                       fontWeight={data[index]?.accent ? "bold" : "300"}
                     >
                       {value}
@@ -160,7 +164,7 @@ const Barchart = ({
               {data.map((entry, index) => (
                 <Cell 
                   key={`cell-${index}`} 
-                  fill={entry.accent ? currentScheme['accent-100'] : currentScheme['primary-100']}
+                  fill={entry.accent ? currentScheme['accent'] : currentScheme['primary']}
                 />
               ))}
             </Bar>

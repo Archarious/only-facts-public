@@ -10,6 +10,10 @@ import { ChevronDown } from '@/lib/icons';
 import { getColorScheme, type ColorSchemeName } from '@/lib/color-schemes'
 import { TwoColorIcon } from '@/lib/icons/two-color-icon';
 
+// TODO: Плохо ипортировать компонент в компонент. 
+// Убрать потом
+import { TypographyH3, DisclosureTitle } from '@/components/Typography';
+
 export interface DisclosureProps {
   title: string;
   children: React.ReactNode;
@@ -25,6 +29,7 @@ export interface DisclosureProps {
 
 const Disclosure = ({
   title,
+  subtitle,
   children,
   className,
   buttonClassName,
@@ -110,11 +115,11 @@ const Disclosure = ({
   const disclosureStyle: React.CSSProperties = {
     // Border внутренний (не влияет на размеры)
     boxSizing: 'border-box',
-    border: `1px solid ${scheme['body-background']}`,
+    border: outline ? `1px solid ${scheme['main-bg']}` : 'none',
 
     // Фон зависит от outline
-    backgroundColor: outline ? 'white' : scheme['body-background'],
-    color: scheme['body-text'],
+    backgroundColor: outline ? 'white' : scheme['main-bg'],
+    color: scheme['main-text'],
   }
 
   // Функция для корректного расчета высоты контента
@@ -183,7 +188,7 @@ const Disclosure = ({
             className={cn(
               'rounded-xl p-10 overflow-hidden relative',
               'flex flex-row items-end-safe gap-4',
-              disclosureStyle,
+              'w-full cursor-pointer',
               buttonClassName
             )}
             style={disclosureStyle}
@@ -201,13 +206,29 @@ const Disclosure = ({
             }
             <div
               className={cn(
-                'overflow-hidden',
-                isClamped && `line-clamp-${clampLines}`,
+                'flex flex-col gap-4 w-full',
+                isClamped && 'h-12',
               )}
             >
-              {title}
+              <DisclosureTitle
+                className={cn(
+                  'overflow-hidden',
+                  isClamped && `line-clamp-${clampLines}`,
+                )}
+                style={{
+                  color: scheme['title-text'],
+                }}
+              >
+                {title}
+              </DisclosureTitle>
+
             </div>
-            <HeadlessDisclosure.Panel static>
+            <HeadlessDisclosure.Panel
+              static
+              style={{
+                color: scheme['main-text'],
+              }}
+            >
               <motion.div
                 initial={{ height: initialHeight }}
                 animate={{
@@ -215,16 +236,25 @@ const Disclosure = ({
                     ? contentHeight
                     : initialHeight
                 }}
-                transition={{ duration: 0.01 }}
+                transition={{ duration: 0.3 }}
                 onAnimationStart={() => open && setIsClamped(false)}
                 onAnimationComplete={() => !open && setIsClamped(true)}
                 className={cn(
-                  'w-312 transition-all overflow-hidden',
+                  'w-311 transition-all overflow-hidden',
                   isClamped && `line-clamp-${clampLines}`,
                   contentClassName
                 )}
               >
-                <div ref={contentRef} className="text-gray-700">
+                <div
+                  ref={contentRef}
+                  className={cn(
+                    "text-[16px] leading-[22px] p-0 m-0",
+                    isClamped ? 'block' : 'flex flex-col gap-10',
+                  )}
+                  style={{
+                    color: scheme['main-text'],
+                  }}
+                >
                   {children}
                 </div>
               </motion.div>

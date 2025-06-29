@@ -28,11 +28,11 @@ const ROI2 = ({ colorScheme = 'aqua-blue-outline' }: ROI2Props) => {
 
   const getBarColor = (index: number) => {
     if (index === 3) { // 2023 год - синий
-      return hoveredIndex === null ? currentScheme['accent-100'] : 
-             hoveredIndex === index ? currentScheme['accent-100'] : currentScheme['accent-60'];
+      return hoveredIndex === null ? currentScheme['accent'] : 
+             hoveredIndex === index ? currentScheme['accent'] : currentScheme['accent-2'];
     } else { // 2020-2022 - оранжевый
-      return hoveredIndex === null ? currentScheme['primary-100'] : 
-             hoveredIndex === index ? currentScheme['primary-100'] : currentScheme['primary-60'];
+      return hoveredIndex === null ? currentScheme['primary'] : 
+             hoveredIndex === index ? currentScheme['primary'] : currentScheme['primary-2'];
     }
   };
 
@@ -69,7 +69,7 @@ const ROI2 = ({ colorScheme = 'aqua-blue-outline' }: ROI2Props) => {
                       y={y+20}
                       textAnchor="middle"
                       fontSize={12}
-                      fill={currentScheme['body-text']}
+                      fill={currentScheme['main-text']}
                       fontWeight={hoveredIndex === index ? "bold" : "normal"}
                     >
                       {payload.value}
@@ -93,7 +93,7 @@ const ROI2 = ({ colorScheme = 'aqua-blue-outline' }: ROI2Props) => {
                         y={15}
                         textAnchor="middle"
                         fontSize={12}
-                        fill={currentScheme['body-text']}
+                        fill={currentScheme['main-text']}
                         fontWeight={hoveredIndex === index ? "bold" : "500"}
                       >
                         {value}

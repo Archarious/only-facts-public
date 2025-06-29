@@ -67,8 +67,8 @@ function MultiSelectFilters({
               "focus-visible:ring-0 focus-visible:outline-none"
             )}
             style={{
-              backgroundColor: isActive ? scheme['filter-active-bg'] : scheme['filter-inactive-bg'],
-              color: scheme['body-text'],
+              backgroundColor: isActive ? scheme['active-bg'] : scheme['inactive-bg'],
+              color: scheme['main-text'],
             } as React.CSSProperties}
           >
             {option.label}

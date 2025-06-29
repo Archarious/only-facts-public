@@ -46,14 +46,14 @@ const ROI3 = ({ colorScheme = 'banana' }: ROI3Props) => {
             <div key={index} className="flex-1 flex flex-col justify-between">
               <div 
                 className="text-4xl font-bold"
-                style={{ color: currentScheme['primary-100'] }}
+                style={{ color: currentScheme['primary'] }}
               >
                 {item.value}
               </div>
               <div className="flex flex-col gap-2">
                 <p 
                   className="text-sm leading-tight"
-                  style={{ color: currentScheme['body-text'] }}
+                  style={{ color: currentScheme['main-text'] }}
                 >
                   {item.description}
                 </p>

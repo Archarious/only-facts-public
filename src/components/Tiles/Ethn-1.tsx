@@ -61,7 +61,7 @@ const Ethn1 = ({ colorScheme = 'aqua-white' }: ROI1Props) => {
                       y={y+20}
                       textAnchor="middle"
                       fontSize={12}
-                      fill={currentScheme['body-text']}
+                      fill={currentScheme['main-text']}
                       fontWeight={hoveredIndex === index ? "bold" : "normal"}
                     >
                       {payload.value}
@@ -84,7 +84,7 @@ const Ethn1 = ({ colorScheme = 'aqua-white' }: ROI1Props) => {
                         y={15}
                         textAnchor="middle"
                         fontSize={12}
-                        fill={currentScheme['body-text']}
+                        fill={currentScheme['main-text']}
                         fontWeight={hoveredIndex === index ? "bold" : "500"}
                       >
                         {value}
@@ -95,7 +95,7 @@ const Ethn1 = ({ colorScheme = 'aqua-white' }: ROI1Props) => {
                 {roiData.map((entry, index) => (
                   <Cell 
                     key={`cell-${index}`} 
-                    fill={hoveredIndex === index ? currentScheme['accent-100'] : currentScheme['primary-100']}
+                    fill={hoveredIndex === index ? currentScheme['accent'] : currentScheme['primary']}
                     onMouseEnter={() => setHoveredIndex(index)}
                   />
                 ))}
