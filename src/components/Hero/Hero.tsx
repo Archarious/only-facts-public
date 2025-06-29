@@ -14,12 +14,14 @@ export interface HeroProps {
     label: string
     href: string
   }>
+  ref?: React.Ref<HTMLDivElement>
 }
 
 function Hero({
   className,
   countryTitle = "Индия",
   menu,
+  ref,
   sectionLinks = [
     { id: 'current-state', label: 'Текущее состояние', href: '#current-state' },
     { id: 'key-changes', label: 'Ключевые изменения', href: '#key-changes' },
@@ -53,9 +55,9 @@ function Hero({
       {...props}
     >
       {/* Первая часть - Верхняя панель с логотипом и меню на всю ширину */}
-      <div className="w-full px-16 pt-16 mb-12">
+      <div className="w-full px-16 pt-16 mb-12" >
         {menu && (
-          <div className="hidden md:flex">
+          <div className="hidden md:flex" ref={ref}>
             {menu}
           </div>
         )}

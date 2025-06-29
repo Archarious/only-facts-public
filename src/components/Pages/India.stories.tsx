@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
+import { useRef } from 'react';
 import { Hero } from '@/components/Hero'
 import { Menu } from '@/components/Menu'
 import { CarouselContainer } from '@/components/CarouselContainer'
@@ -7,6 +8,7 @@ import { Card } from '@/components/Card'
 import { Callout } from '@/components/Callout'
 import { MultiSelectFilters } from '@/components/MultiSelectFilters'
 import { Disclosure } from '@/components/Disclosure'
+import { FloatingMenu } from '@/components/FloatingMenu'
 
 import { TypographyH2, TypographyH3, TypographyParagraph, CaptionTitle } from '@/components/Typography'
 
@@ -124,11 +126,20 @@ const mainMenu = (
 );
 
 export const FullDashboardPage: Story = {
-  render: () => (
+  render: (args) => {
+    const heroRef = useRef<HTMLElement>(null);
+
+    return (
     <>
+    <FloatingMenu 
+      threshold={75}
+      menu={mainMenu}
+      heroRef={heroRef}
+    />
     <div className="flex flex-col p-4 items-center min-h-screen bg-gray-100">
       <Hero
         menu={mainMenu}
+        ref={heroRef}
       />
         <div className="flex flex-col gap-26">
         <CarouselContainer className='mt-10'>
@@ -2100,7 +2111,7 @@ export const FullDashboardPage: Story = {
       
     </div>
     </>
-  ),
+  )},
   parameters: {
     viewport: {
       defaultViewport: 'mobile1'
