@@ -7,6 +7,7 @@ import { getColorScheme, type ColorSchemeName } from '@/lib/color-schemes'
 import { ChevronDown } from '@/lib/icons'
 
 export interface CardProps {
+  type?: string
   width: number
   height: number
   title?: string | React.ReactNode
@@ -28,6 +29,7 @@ interface DialogState {
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(({
+  type,
   width,
   height,
   title,
@@ -105,6 +107,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({
           className={cn(
             `text-[${titleSize}px]`,
             `color-${scheme['title-text']}`,
+            type === 'news' ? 'font-semibold' : 'font-medium',
           )}
         >
           {title}
@@ -160,9 +163,13 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({
                 </p>
               }
             </div>
-            <div className="h-full">
+            { type === 'news' ? (<div className="h-[4.5em] line-clamp-3 overflow-hidden">
               {children}
-            </div>
+            </div>) : 
+            (<div className="h-full">
+              {children}
+            </div>)
+            }
           </>
         )}
       </div>
