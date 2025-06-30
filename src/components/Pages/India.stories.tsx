@@ -1077,7 +1077,7 @@ export const FullDashboardPage: Story = {
           </div>
           <Callout 
             authorName = "Стася Аналитик"
-            avatarSrc='/avatar.png'
+            avatarSrc='/only-facts-public/avatar.png'
           >
             <strong>Комментарий эксперта</strong> 
             <br />
@@ -1222,7 +1222,7 @@ export const FullDashboardPage: Story = {
           </div>
           <Callout 
             authorName = "Стася Аналитик"
-            avatarSrc='/avatar.png'
+            avatarSrc='/only-facts-public/avatar.png'
           >
             <strong>Комментарий эксперта</strong> 
             <br />
@@ -1437,49 +1437,49 @@ export const FullDashboardPage: Story = {
           <CarouselContainer className='mt-10'>
             <div className="flex flex-row gap-4 mx-50">
               <img
-                src='/screenshots/stake1.png'
+                src='/only-facts-public/screenshots/stake1.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake2.png'
+                src='/only-facts-public/screenshots/stake2.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake3.png'
+                src='/only-facts-public/screenshots/stake3.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake4.png'
+                src='/only-facts-public/screenshots/stake4.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake5.png'
+                src='/only-facts-public/screenshots/stake5.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake6.png'
+                src='/only-facts-public/screenshots/stake6.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake7.png'
+                src='/only-facts-public/screenshots/stake7.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
@@ -1555,49 +1555,49 @@ export const FullDashboardPage: Story = {
           <CarouselContainer className='mt-10'>
             <div className="flex flex-row gap-4 mx-50 select-none">
               <img
-                src='/screenshots/stake1.png'
+                src='/only-facts-public/screenshots/stake1.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake2.png'
+                src='/only-facts-public/screenshots/stake2.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake3.png'
+                src='/only-facts-public/screenshots/stake3.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake4.png'
+                src='/only-facts-public/screenshots/stake4.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake5.png'
+                src='/only-facts-public/screenshots/stake5.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake6.png'
+                src='/only-facts-public/screenshots/stake6.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
                 draggable="false"
               />
               <img
-                src='/screenshots/stake7.png'
+                src='/only-facts-public/screenshots/stake7.png'
                 style={{
                   width: 'calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})',
                 }}
@@ -1621,7 +1621,7 @@ export const FullDashboardPage: Story = {
         </TypographyParagraph>
         <Callout 
           authorName = "Стася Аналитик"
-          avatarSrc='/avatar.png'
+          avatarSrc='/only-facts-public/avatar.png'
         >
           <strong>Комментарий эксперта</strong> 
           <br />
