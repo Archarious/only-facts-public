@@ -69,14 +69,14 @@ const FloatingMenu = ({
       )}
     >
       {/* Основной контейнер с отступами */}
-      <div className="relative h-[100px] max-w-[1490px] mx-auto">
+      <div className="relative h-[90px] max-w-[1490px] mx-auto">
         {/* Основной желтый блок */}
         <div 
           className={cn(
-            'absolute inset-0 h-[100px]',
+            'absolute inset-0 h-[90px]',
             'bg-[#FDE85B] rounded-[32px]',
             'shadow-[0px_2px_4px_rgba(156,154,0,0.35),0px_4px_20px_rgba(121,85,8,0.14)]',
-            'p-16',
+            'p-11',
           )}
         >
           {menu}

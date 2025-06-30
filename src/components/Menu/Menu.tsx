@@ -4,6 +4,9 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { Logo } from '@/lib/icons';
 
+import { DropdownMenu } from '@/components/DropdownMenu';
+import type { DropdownMenuItem } from '@/components/DropdownMenu';
+
 export interface Country {
   id: string;
   name: string;
@@ -22,6 +25,31 @@ export interface MenuProps {
   onUserClick?: () => void;
   onLogoClick?: () => void;
 }
+
+const SectionSummaryItems: DropdownMenuItem[] = [
+  { id: '1', label: 'Доходность рынка', href: '#revenue' },
+  { id: '2', label: 'Регуляторы', href: '#regulators' },
+  { id: '3', label: 'Поисковые запросы', href: '#search' },
+  { id: '4', label: 'Лицензии', href: '#licenses' },
+  { id: '5', label: 'Партнеры и конкуренты', href: '#partners' },
+  { id: '6', label: 'Инсайты', href: '#insights' },
+];
+
+const TriggerButton = ({ children }: { children: React.ReactNode }) => (
+  <button
+    className={cn(
+      "text-sm font-black leading-[22px]",
+      "text-(--color-palette-charcoal-100)",
+      "hover:text-(--color-palette-red-100) transition-colors",
+      "hover:cursor-pointer"
+    )}
+    style={{
+      outline: 'none'
+    }}
+  >
+    {children}
+  </button>
+);
 
 const Menu = ({
   countries = [],
@@ -86,23 +114,12 @@ const Menu = ({
         </div>
 
         {/* Содержание раздела */}
-        <button
-          onClick={onSectionClick}
-          className={cn(
-            "text-sm font-black leading-[22px]",
-            "text-(--color-palette-charcoal-100)",
-            "hover:text-(--color-palette-red-100) transition-colors",
-            "hover:cursor-pointer"
-          )}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = 'var(--color-palette-red-100)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = 'var(--color-palette-charcoal-100)';
-          }}
-        >
-          {sectionName}
-        </button>
+        <DropdownMenu
+          trigger={(<TriggerButton>Содержание раздела</TriggerButton>)}
+          title="Содержание раздела"
+          items={SectionSummaryItems}
+          width={260}
+        />
 
         {/* Имя пользователя */}
         <button

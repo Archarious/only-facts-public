@@ -94,45 +94,27 @@ const mockMenuItems: DropdownMenuItem[] = [
   { id: '6', label: 'Инсайты', href: '#insights' },
 ];
 
-
-const mainMenu = () => {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
-
-  return (
-    <>
-      <DropdownMenu
-        title="Содержание раздела"
-        items={mockMenuItems}
-        width={260}
-        isOpen={isMenuOpen}
-        onOpenChange={setIsMenuOpen}
-        positionRef={buttonRef}
-      />
-      <Menu
-        countries={[
-          { id: 'in', name: 'Индия', flagUrl: '/flags/in-circle-20.png', isActive: true },
-          { id: 'uy', name: 'Уругвай', flagUrl: '/flags/uy-circle-20.png', isActive: false },
-          { id: 'mx', name: 'Мексика', flagUrl: '/flags/mx-circle-20.png', isActive: false },
-          { id: 'mt', name: 'Мальта', flagUrl: '/flags/mt-circle-20.png', isActive: false },
-          { id: 'ua', name: 'Украина', flagUrl: '/flags/ua-circle-20.png', isActive: false },
-          { id: 'ru', name: 'Россия', flagUrl: '/flags/ru-circle-20.png', isActive: false },
-          { id: 'ge', name: 'Грузия', flagUrl: '/flags/ge-circle-20.png', isActive: false },
-          { id: 'il', name: 'Израиль', flagUrl: '/flags/il-circle-20.png', isActive: false },
-          { id: 'it', name: 'Италия', flagUrl: '/flags/it-circle-20.png', isActive: false },
-          { id: 'cn', name: 'Китай', flagUrl: '/flags/cn-circle-20.png', isActive: false }
-        ]}
-        userRole="Гемблинг-оператор"
-        sectionName="Содержание раздела"
-        userName="Имя Пользователя"
-        onCountryToggle={(countryId) => console.log(`Переключена страна: ${countryId}`)}
-        onSectionClick={() => console.log('Клик по разделу')}
-        onUserClick={() => console.log('Клик по пользователю')}
-        onLogoClick={() => console.log('Клик по логотипу')}
-      />
-    </>
-  )
-}
+const mainMenu = <Menu
+  countries={[
+    { id: 'in', name: 'Индия', flagUrl: '/flags/in-circle-20.png', isActive: true },
+    { id: 'uy', name: 'Уругвай', flagUrl: '/flags/uy-circle-20.png', isActive: false },
+    { id: 'mx', name: 'Мексика', flagUrl: '/flags/mx-circle-20.png', isActive: false },
+    { id: 'mt', name: 'Мальта', flagUrl: '/flags/mt-circle-20.png', isActive: false },
+    { id: 'ua', name: 'Украина', flagUrl: '/flags/ua-circle-20.png', isActive: false },
+    { id: 'ru', name: 'Россия', flagUrl: '/flags/ru-circle-20.png', isActive: false },
+    { id: 'ge', name: 'Грузия', flagUrl: '/flags/ge-circle-20.png', isActive: false },
+    { id: 'il', name: 'Израиль', flagUrl: '/flags/il-circle-20.png', isActive: false },
+    { id: 'it', name: 'Италия', flagUrl: '/flags/it-circle-20.png', isActive: false },
+    { id: 'cn', name: 'Китай', flagUrl: '/flags/cn-circle-20.png', isActive: false }
+  ]}
+  userRole="Гемблинг-оператор"
+  sectionName="Содержание раздела"
+  userName="Имя Пользователя"
+  onCountryToggle={(countryId) => console.log(`Переключена страна: ${countryId}`)}
+  onSectionClick={() => console.log('Клик по разделу')}
+  onUserClick={() => console.log('Клик по пользователю')}
+  onLogoClick={() => console.log('Клик по логотипу')}
+/>
 
 export const FullDashboardPage: Story = {
   render: (args) => {
@@ -140,16 +122,16 @@ export const FullDashboardPage: Story = {
 
     return (
     <>
-    <FloatingMenu 
-      threshold={75}
-      menu={mainMenu}
-      heroRef={heroRef}
-    />
-    <div className="flex flex-col p-4 items-center min-h-screen bg-gray-100">
-      <Hero
+      <FloatingMenu 
+        threshold={75}
         menu={mainMenu}
-        ref={heroRef}
+        heroRef={heroRef}
       />
+      <div className="flex flex-col p-4 items-center min-h-screen bg-gray-100">
+        <Hero
+          menu={mainMenu}
+          ref={heroRef}
+        />
         <div className="flex flex-col gap-26">
         <CarouselContainer className='mt-10'>
           <div className="flex gap-4 mx-50">

@@ -48,7 +48,7 @@ const DropdownMenu = ({
       const rect = targetElement.getBoundingClientRect();
       setMenuPosition({
         top: rect.bottom + window.scrollY - 40,
-        left: rect.left + window.scrollX - 10,
+        left: rect.left + window.scrollX - 20,
       });
     }
   }, [positionRef]);
@@ -102,7 +102,7 @@ const DropdownMenu = ({
             "fixed z-[9999] rounded-xl",
             "bg-white/45 backdrop-blur-[10px]",
             "shadow-[0px_4px_20px_rgba(0,0,0,0.15)]",
-            "flex flex-col gap-0 p-5",
+            "flex flex-col gap-0 p-10",
             menuClassName
           )}
           style={{ 
@@ -110,6 +110,7 @@ const DropdownMenu = ({
             top: `${menuPosition.top}px`,
             left: `${menuPosition.left}px`,
             display: isOpen ? 'flex' : 'none',
+            outline: 'none',
           }}
         >
           {/* Заголовок - всегда резервируем место */}
@@ -130,11 +131,13 @@ const DropdownMenu = ({
                     <a
                       href={item.href}
                       className={cn(
-                        "block p-0 text-sm font-light leading-8",
-                        "hover:bg-white/20 hover:backdrop-blur-sm rounded-lg transition-colors",
-                        "data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed"
+                        "block p-0 text-sm font-light leading-[22px]",
+                        "text-sm font-normal",
+                        "text-(--color-palette-charcoal-100)",
+                        "hover:text-(--color-palette-red-100) transition-colors",
+                        "hover:cursor-pointer",
+                        "data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed",
                       )}
-                      style={{ color: 'var(--color-palette-charcoal-100)' }}
                       onClick={() => {
                         onOpenChange?.(false);
                         close();
@@ -145,11 +148,13 @@ const DropdownMenu = ({
                   ) : (
                     <button
                       className={cn(
-                        "block w-full text-left px-0 py-0 text-sm font-light leading-8",
-                        "hover:bg-white/20 hover:backdrop-blur-sm rounded-lg transition-colors",
+                        "block w-full text-left px-0 py-0 text-sm font-light leading-[22px]",
+                        "text-sm font-normal",
+                        "text-(--color-palette-charcoal-100)",
+                        "hover:text-(--color-palette-red-100) transition-colors",
+                        "hover:cursor-pointer",
                         "data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed"
                       )}
-                      style={{ color: 'var(--color-palette-charcoal-100)' }}
                       onClick={() => {
                         if (!item.disabled) {
                           item.onClick?.();
@@ -194,13 +199,14 @@ const DropdownMenu = ({
           "fixed z-[9999] rounded-xl",
           "bg-white/45 backdrop-blur-[10px]",
           "shadow-[0px_4px_20px_rgba(0,0,0,0.15)]",
-          "flex flex-col gap-0 p-5",
+          "flex flex-col gap-0 p-10",
           menuClassName
         )}
         style={{ 
           width: `${width}px`,
           top: `${menuPosition.top}px`,
           left: `${menuPosition.left}px`,
+          outline: 'none',
         }}
       >
         {/* Заголовок - всегда резервируем место */}
@@ -221,11 +227,13 @@ const DropdownMenu = ({
                   <a
                     href={item.href}
                     className={cn(
-                      "block p-0 text-sm font-light leading-8",
-                      "hover:bg-white/20 hover:backdrop-blur-sm rounded-lg transition-colors",
+                      "block p-0 text-sm font-light leading-[22px]",
+                      "text-sm font-normal",
+                      "text-(--color-palette-charcoal-100)",
+                      "hover:text-(--color-palette-red-100) transition-colors",
+                      "hover:cursor-pointer",
                       "data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed"
                     )}
-                    style={{ color: 'var(--color-palette-charcoal-100)' }}
                     onClick={close}
                   >
                     {item.label}
@@ -233,11 +241,13 @@ const DropdownMenu = ({
                 ) : (
                   <button
                     className={cn(
-                      "block w-full text-left px-0 py-0 text-sm font-light leading-8",
-                      "hover:bg-white/20 hover:backdrop-blur-sm rounded-lg transition-colors",
+                      "block w-full text-left px-0 py-0 text-sm font-light leading-[22px]",
+                      "text-sm font-normal",
+                      "text-(--color-palette-charcoal-100)",
+                      "hover:text-(--color-palette-red-100) transition-colors",
+                      "hover:cursor-pointer",
                       "data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed"
                     )}
-                    style={{ color: 'var(--color-palette-charcoal-100)' }}
                     onClick={() => {
                       item.onClick?.();
                       close();
