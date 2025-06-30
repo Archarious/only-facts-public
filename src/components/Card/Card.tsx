@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useState, forwardRef, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { getColorScheme, type ColorSchemeName } from '@/lib/color-schemes'
 import { ChevronDown } from '@/lib/icons'
@@ -17,9 +18,16 @@ export interface CardProps {
   children: React.ReactNode
   tags?: string[]
   isExpandable?: boolean
+  onClick?: () => void
 }
 
-function Card({
+interface DialogState {
+  isOpen: boolean
+  position: { x: number; y: number }
+  size: { width: number; height: number }
+}
+
+const Card = forwardRef<HTMLDivElement, CardProps>(({
   width,
   height,
   title,
@@ -31,41 +39,60 @@ function Card({
   children,
   tags = [],
   isExpandable = false,
+  onClick,
   ...props
-}: CardProps) {
-  const scheme = getColorScheme(colorScheme)
+}, ref) => {
+  const [dialog, setDialog] = useState<DialogState>({
+    isOpen: false,
+    position: { x: 0, y: 0 },
+    size: { width: 0, height: 0 }
+  })
   
-  const cardStyle: React.CSSProperties = {
-    // Размеры на основе size-point
-    width: `calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})`,
-    height: `calc(var(--size-point) * ${height} + var(--sizes-gutter) * ${height - 1})`,
-    
-    // Grid структура 3x3
-    display: 'grid',
-    gridTemplateColumns: '20px 1fr 20px',
-    gridTemplateRows: `20px 1fr ${(tags.length > 0 || isExpandable) ? 'max-content' : '20px'}`,
-    
-    // Только радиус, без padding
-    borderRadius: 'var(--radius)',
-    
-    // Border внутренний (не влияет на размеры)
-    boxSizing: 'border-box',
-    border: `1px solid ${scheme['main-bg']}`,
-    
-    // Фон зависит от outline
-    backgroundColor: outline ? 'white' : scheme['main-bg'],
-    color: scheme['main-text'],
-  }
+  const scheme = getColorScheme(colorScheme)
 
-  const overlayStyle: React.CSSProperties = {
-    background: `linear-gradient(to right, transparent, ${outline ? 'white' : scheme['main-bg']})`,
-  }
+  // Деликатная блокировка взаимодействий при открытом модальном окне
+  useEffect(() => {
+    if (dialog.isOpen) {
+      // Предотвращаем только touch события для блокировки драга на мобильных
+      const preventTouchMove = (e: TouchEvent) => {
+        // Разрешаем touch события только внутри модального окна
+        const target = e.target as Element
+        const modalElement = document.querySelector('[data-modal-content]')
+        
+        if (!modalElement?.contains(target)) {
+          e.preventDefault()
+        }
+      }
 
-  const footerStyle: React.CSSProperties = {
-    minHeight: isExpandable ? '58px' : '20px',
-    paddingTop: isExpandable || tags.length ? '12px' : '0',
-    paddingBottom: isExpandable || tags.length ? '20px' : '0',
-  }
+      // Закрываем модальное окно при скролле страницы
+      const handleScroll = () => {
+        closeDialog()
+      }
+
+      // Закрываем модальное окно при клике вне Card (на начале клика)
+      const handleMouseDown = (e: MouseEvent) => {
+        const target = e.target as Element
+        const modalElement = document.querySelector('[data-modal-content]')
+        
+        // Закрываем если клик произошел вне модального окна
+        if (!modalElement?.contains(target)) {
+          closeDialog()
+        }
+      }
+      
+      // Добавляем обработчики
+      document.addEventListener('touchmove', preventTouchMove, { passive: false })
+      window.addEventListener('scroll', handleScroll)
+      document.addEventListener('mousedown', handleMouseDown)
+      
+      // Cleanup функция
+      return () => {
+        document.removeEventListener('touchmove', preventTouchMove)
+        window.removeEventListener('scroll', handleScroll)
+        document.removeEventListener('mousedown', handleMouseDown)
+      }
+    }
+  }, [dialog.isOpen])
 
   // Функция для рендеринга title
   const renderTitle = () => {
@@ -89,16 +116,9 @@ function Card({
     return title
   }
 
-  return (
-    <div
-      className={cn(
-        "overflow-hidden",
-        'select-none',
-        className
-      )}
-      style={cardStyle}
-      {...props}
-    >
+  // Рендер содержимого Card (переиспользуется в модальном окне)
+  const renderCardContent = () => (
+    <>
       {/* Основная область контента - центральная ячейка */}
       <div 
         className="flex flex-col justify-between h-full row-start-2 col-start-2"
@@ -172,9 +192,130 @@ function Card({
           )}
         </div>
       )}
-    </div>
+    </>
   )
-}
+
+  // Обработчик клика по Card
+  const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const cardElement = event.currentTarget
+    const rect = cardElement.getBoundingClientRect()
+    
+    setDialog({
+      isOpen: true,
+      position: {
+        x: rect.left,
+        y: rect.top
+      },
+      size: {
+        width: rect.width,
+        height: rect.height
+      }
+    })
+    
+    // Вызываем пользовательский onClick если он есть
+    onClick?.()
+  }
+
+  // Закрытие модального окна
+  const closeDialog = () => {
+    setDialog(prev => ({ ...prev, isOpen: false }))
+  }
+
+  // Обработчик клавиши Escape
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && dialog.isOpen) {
+        closeDialog()
+      }
+    }
+
+    if (dialog.isOpen) {
+      document.addEventListener('keydown', handleEscape)
+      return () => document.removeEventListener('keydown', handleEscape)
+    }
+  }, [dialog.isOpen])
+
+  const cardStyle: React.CSSProperties = {
+    // Размеры на основе size-point
+    width: `calc(var(--size-point) * ${width} + var(--sizes-gutter) * ${width - 1})`,
+    height: `calc(var(--size-point) * ${height} + var(--sizes-gutter) * ${height - 1})`,
+    
+    // Grid структура 3x3
+    display: 'grid',
+    gridTemplateColumns: '20px 1fr 20px',
+    gridTemplateRows: `20px 1fr ${(tags.length > 0 || isExpandable) ? 'max-content' : '20px'}`,
+    
+    // Только радиус, без padding
+    borderRadius: 'var(--radius)',
+    
+    // Border внутренний (не влияет на размеры)
+    boxSizing: 'border-box',
+    border: `1px solid ${scheme['main-bg']}`,
+    
+    // Фон зависит от outline
+    backgroundColor: outline ? 'white' : scheme['main-bg'],
+    color: scheme['main-text'],
+    
+    // Курсор указывает на кликабельность
+    cursor: isExpandable ? 'pointer' : 'default',
+  }
+
+  const overlayStyle: React.CSSProperties = {
+    background: `linear-gradient(to right, transparent, ${outline ? 'white' : scheme['main-bg']})`,
+  }
+
+  const footerStyle: React.CSSProperties = {
+    minHeight: isExpandable ? '58px' : '20px',
+    paddingTop: isExpandable || tags.length ? '12px' : '0',
+    paddingBottom: isExpandable || tags.length ? '20px' : '0',
+  }
+
+  return (
+    <>
+      {/* Основная Card */}
+      <div
+        ref={ref}
+        className={cn(
+          "overflow-hidden",
+          'select-none',
+          className
+        )}
+        style={cardStyle}
+        onClick={isExpandable && handleCardClick}
+        {...props}
+      >
+        {renderCardContent()}
+      </div>
+
+      {/* Модальное окно */}
+      {dialog.isOpen && (
+        <>
+          {/* Dialog */}
+          <div
+            data-modal-content // Маркер для touch событий
+            className={cn(
+              "fixed z-50 overflow-hidden shadow-2xl",
+              'select-none'
+            )}
+            style={{
+              ...cardStyle,
+              left: dialog.position.x,
+              top: dialog.position.y,
+              width: dialog.size.width,
+              height: dialog.size.height * 2,
+              transform: 'scale(1)',
+              transition: 'transform 0.2s ease-out',
+              pointerEvents: 'auto', // Разрешаем взаимодействие с модальным окном
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {renderCardContent()}
+          </div>
+        </>
+      )}
+    </>
+  )
+})
 
 Card.displayName = 'Card'
 
