@@ -12,7 +12,7 @@ import { TwoColorIcon } from '@/lib/icons/two-color-icon';
 
 // TODO: Плохо ипортировать компонент в компонент. 
 // Убрать потом
-import { TypographyH3, DisclosureTitle } from '@/components/Typography';
+import { TypographyH3, DisclosureTitle, TypographyH3NEW } from '@/components/Typography';
 
 export interface DisclosureProps {
   title: string;
@@ -51,12 +51,6 @@ const Disclosure = ({
   // Анимация для TwoColorIcon размера
   const iconSize = useMotionValue(defaultOpen ? 68 : 24);
   const [currentIconSize, setCurrentIconSize] = React.useState(defaultOpen ? 68 : 24);
-
-  React.useEffect(() => {
-    if (contentRef.current) {
-      setContentHeight(contentRef.current.scrollHeight);
-    }
-  }, [children]);
 
   React.useEffect(() => {
     if (clampLines > 1) {
@@ -122,51 +116,68 @@ const Disclosure = ({
     color: scheme['main-text'],
   }
 
-  // Функция для корректного расчета высоты контента
+  // Улучшенная функция для измерения высоты
   const measureContentHeight = React.useCallback(() => {
-    if (!contentRef.current) return 'auto';
+    if (!contentRef.current) return;
 
-    return new Promise<number>((resolve) => {
-      const element = contentRef.current!;
+    const element = contentRef.current;
+    const motionContainer = element.parentElement;
+    if (!motionContainer) return;
+
+    // Получаем реальную ширину контейнера
+    const containerWidth = motionContainer.offsetWidth;
+
+    // Создаем временный контейнер с точной шириной
+    const measureContainer = document.createElement('div');
+    measureContainer.style.cssText = `
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+      width: ${containerWidth}px;
+      visibility: hidden;
+      pointer-events: none;
+    `;
+    
+    // Создаем клон контента с точными стилями
+    const contentClone = element.cloneNode(true) as HTMLElement;
+    contentClone.style.cssText = `
+      text-align: left;
+      font-size: 16px;
+      line-height: 22px;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+      width: 100%;
+    `;
+
+    // Добавляем в DOM для измерения
+    measureContainer.appendChild(contentClone);
+    document.body.appendChild(measureContainer);
+
+    // Ждем следующий кадр для точного измерения
+    requestAnimationFrame(() => {
+      const rect = contentClone.getBoundingClientRect();
+      const measuredHeight = Math.ceil(rect.height);
       
-      // Создаем клон элемента для измерения
-      const clone = element.cloneNode(true) as HTMLElement;
-      const parent = element.parentElement!;
+      setContentHeight(measuredHeight);
       
-      // Настраиваем стили клона для точного измерения
-      clone.style.cssText = `
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-        width: ${element.offsetWidth}px;
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-        visibility: hidden;
-        pointer-events: none;
-        display: block;
-      `;
-      
-      // Добавляем клон в DOM
-      parent.appendChild(clone);
-      
-      // Даем браузеру время пересчитать layout
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          const height = clone.getBoundingClientRect().height;
-          parent.removeChild(clone);
-          resolve(Math.ceil(height));
-        });
-      });
+      // Убираем временные элементы
+      document.body.removeChild(measureContainer);
     });
   }, []);
 
   React.useEffect(() => {
-    measureContentHeight().then((height) => {
-      if (typeof height === 'number') {
-        setContentHeight(height);
-      }
-    });
+    // Задержка для корректного измерения после рендера
+    const timer = setTimeout(() => {
+      measureContentHeight();
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [children, measureContentHeight]);
 
   return (
@@ -206,11 +217,11 @@ const Disclosure = ({
             }
             <div
               className={cn(
-                'flex flex-col gap-4 w-full',
+                'flex flex-col gap-4 w-full justify-center',
                 isClamped && 'h-12',
               )}
             >
-              <DisclosureTitle
+              <TypographyH3NEW
                 className={cn(
                   'overflow-hidden',
                   isClamped && `line-clamp-${clampLines}`,
@@ -220,7 +231,7 @@ const Disclosure = ({
                 }}
               >
                 {title}
-              </DisclosureTitle>
+              </TypographyH3NEW>
 
             </div>
             <HeadlessDisclosure.Panel
@@ -233,7 +244,7 @@ const Disclosure = ({
                 initial={{ height: initialHeight }}
                 animate={{
                   height: open
-                    ? contentHeight
+                    ? typeof contentHeight === 'number' ? `${contentHeight}px` : 'auto'
                     : initialHeight
                 }}
                 transition={{ duration: 0.3 }}

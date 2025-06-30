@@ -4,6 +4,8 @@ import { Card } from '@/components/Card';
 import type { ColorScheme } from '@/lib/color-schemes';
 import { getColorScheme } from '@/lib/color-schemes';
 
+import { TileTypography, TypographyH3NEW } from '@/components/Typography';
+
 export interface ROI3Props {
   colorScheme?: ColorScheme;
 }
@@ -37,19 +39,18 @@ const ROI3 = ({ colorScheme = 'banana' }: ROI3Props) => {
     >
       <div className="h-full flex flex-col gap-7">
         <div className="flex flex-col">
-          <h3 className="text-lg font-medium">
+          <TypographyH3NEW>
             Размер рынка, различные источники
-          </h3>
+          </TypographyH3NEW>
         </div>
         <div className="flex-1 flex gap-2">
           {marketData.map((item, index) => (
             <div key={index} className="flex-1 flex flex-col justify-between">
-              <div 
-                className="text-4xl font-bold"
+              <TileTypography.H1 
                 style={{ color: currentScheme['primary'] }}
               >
                 {item.value}
-              </div>
+              </TileTypography.H1>
               <div className="flex flex-col gap-2">
                 <p 
                   className="text-sm leading-tight"

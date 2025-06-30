@@ -876,9 +876,9 @@ export const FullDashboardPage: Story = {
             <Disclosure
               title="Нестабильный конверт"
               subtitle="Министерство электроники и информационных технологий Индии"
-              colorScheme= "aqua-white"
+              colorScheme= "blue-aqua"
               clampLines={1}
-              icon={(<TwoColorIcon  name="refresh"  size={16} colorScheme="yellow-red"/>)}
+              icon={(<TwoColorIcon  name="refresh"  size={16} colorScheme="banana2"/>)}
             >
               <p>
                 Отвечает за все нормативные вопросы, связанные с онлайн азартными играми и играми с элементом навыка (исключая электронный спорт, который регулирует Министерство
@@ -899,7 +899,7 @@ export const FullDashboardPage: Story = {
               subtitle="Министерство электроники и информационных технологий Индии"
               colorScheme= "banana"
               clampLines={1}
-              icon={(<TwoColorIcon  name="pagelook"  size={16} colorScheme="banana"/>)}
+              icon={(<TwoColorIcon  name="pagelook"  size={16} colorScheme="gray-blue"/>)}
             >
               <p>
                 Ключевое правительственное ведомство Индии, ответственное за формирование и реализацию государственной политики в области информационных технологий, цифровой инфраструктуры и кибербезопасности. Оно играет центральную роль в цифровой трансформации страны, курируя крупные национальные инициативы вроде Digital India и BharatNet, а также развивая IT-индустрию и электронное управление.
@@ -919,7 +919,7 @@ export const FullDashboardPage: Story = {
               subtitle="Центральный банк Индии"
               colorScheme="banana"
               clampLines={1}
-              icon={(<TwoColorIcon  name="filesystem"  size={16} colorScheme="banana"/>)}
+              icon={(<TwoColorIcon  name="filesystem"  size={16} colorScheme="gray-blue"/>)}
             >
               <p>
                 Один из старейших и крупнейших коммерческих банков страны, основанный в 1911 году. Несмотря на своё название, это не центральный (эмиссионный) банк, а государственный коммерческий банк, который играет значимую роль в финансовой системе Индии. Он предоставляет широкий спектр банковских услуг физическим и юридическим лицам: от сберегательных счетов и кредитов до инвестиционных продуктов и цифровых платежных решений.

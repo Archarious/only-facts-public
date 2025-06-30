@@ -4,7 +4,6 @@ import { Card } from '@/components/Card';
 import type { ColorScheme } from '@/lib/color-schemes';
 import { getColorScheme } from '@/lib/color-schemes';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, LabelList } from 'recharts';
-import { useState } from 'react';
 
 export interface ROI1Props {
   colorScheme?: ColorScheme;
@@ -17,8 +16,6 @@ const roiData = [
 ];
 
 const ROI1 = ({ colorScheme = 'red-aqua' }: ROI1Props) => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  
   const chartRadius = typeof window !== 'undefined' 
     ? parseInt(getComputedStyle(document.documentElement).getPropertyValue('--chart-radius')) || 60
     : 60;
@@ -42,7 +39,6 @@ const ROI1 = ({ colorScheme = 'red-aqua' }: ROI1Props) => {
             <BarChart
               data={roiData}
               margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
-              onMouseLeave={() => setHoveredIndex(null)}
               barCategoryGap="2"
             >
               <XAxis 
@@ -58,7 +54,7 @@ const ROI1 = ({ colorScheme = 'red-aqua' }: ROI1Props) => {
                       textAnchor="middle"
                       fontSize={12}
                       fill={currentScheme['main-text']}
-                      fontWeight={hoveredIndex === index ? "bold" : "normal"}
+                      fontWeight={index === 2 ? "bold" : "normal"}
                     >
                       {payload.value}
                     </text>
@@ -81,7 +77,7 @@ const ROI1 = ({ colorScheme = 'red-aqua' }: ROI1Props) => {
                         textAnchor="middle"
                         fontSize={12}
                         fill={currentScheme['main-text']}
-                        fontWeight={hoveredIndex === index ? "bold" : "500"}
+                        fontWeight={index === 2 ? "bold" : "500"}
                       >
                         {value}
                       </text>
@@ -91,8 +87,7 @@ const ROI1 = ({ colorScheme = 'red-aqua' }: ROI1Props) => {
                 {roiData.map((entry, index) => (
                   <Cell 
                     key={`cell-${index}`} 
-                    fill={hoveredIndex === index ? currentScheme['primary'] : currentScheme['accent']}
-                    onMouseEnter={() => setHoveredIndex(index)}
+                    fill={index === 2 ? currentScheme['primary'] : currentScheme['accent']}
                   />
                 ))}
               </Bar>

@@ -314,6 +314,22 @@ export const colorSchemes: Record<string, ColorScheme> = {
     'inactive-bg': 'var(--color-palette-aqua-100)'
   },
 
+  banana2: {
+    'primary': 'var(--color-palette-white-100)',
+    'primary-2': 'var(--color-palette-white-060)',
+    'accent': 'var(--color-palette-blue-100)',
+    'accent-2': 'var(--color-palette-blue-060)',
+    'main-text': 'var(--color-palette-black)',
+    'main-bg': 'var(--color-palette-banana-100)',
+    'title-text': 'var(--color-palette-black)',
+    'icon-bg': 'var(--color-palette-whit)',
+    'icon-fill': 'var(--color-palette-black)',
+    'tag-bg': 'var(--color-palette-white-040)',
+    'tag-text': 'var(--color-palette-grey-050)',
+    'active-bg': 'var(--color-charcoal)',
+    'inactive-bg': 'var(--color-palette-aqua-100)'
+  },
+
   'red-black' : {
     'primary': 'var(--color-palette-red-100)',
     'primary-2': 'var(--color-palette-red-060)',
@@ -328,6 +344,22 @@ export const colorSchemes: Record<string, ColorScheme> = {
     'tag-text': 'var(--color-palette-black-100)',
     'active-bg': 'var(--color-palette-red-100)',
     'inactive-bg': 'var(--color-palette-red-040)'
+  },
+
+  'blue-aqua': {
+    'primary':        'var(--color-palette-yellow-100)',
+    'primary-2':         'var(--color-palette-yellow-060)',
+    'accent':         'var(--color-palette-aqua-100)',
+    'accent-2':          'var(--color-palette-aqua-060)',
+    'main-text':          '#FFFFFF',
+    'main-bg':            'var(--color-palette-aqua-060)',
+    'title-text':         '#FFFFFF',
+    'icon-bg':            '#FFFFFF',
+    'icon-fill':          '#202020',
+    'tag-bg':             'var(--color-palette-white-040)',
+    'tag-text':           '#202020',
+    'active-bg':   'var(--color-palette-blue-100)',
+    'inactive-bg': 'var(--color-palette-blue-040)',
   },
 }
 

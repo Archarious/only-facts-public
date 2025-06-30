@@ -4,7 +4,6 @@ import { Card } from '@/components/Card';
 import type { ColorScheme } from '@/lib/color-schemes';
 import { getColorScheme } from '@/lib/color-schemes';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, LabelList } from 'recharts';
-import { useState } from 'react';
 
 export interface ROI2Props {
   colorScheme?: ColorScheme;
@@ -18,8 +17,6 @@ const marketData = [
 ];
 
 const ROI2 = ({ colorScheme = 'aqua-blue-outline' }: ROI2Props) => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  
   const chartRadius = typeof window !== 'undefined' 
     ? parseInt(getComputedStyle(document.documentElement).getPropertyValue('--chart-radius')) || 60
     : 60;
@@ -27,12 +24,10 @@ const ROI2 = ({ colorScheme = 'aqua-blue-outline' }: ROI2Props) => {
   const currentScheme = getColorScheme(colorScheme as string);
 
   const getBarColor = (index: number) => {
-    if (index === 3) { // 2023 год - синий
-      return hoveredIndex === null ? currentScheme['accent'] : 
-             hoveredIndex === index ? currentScheme['accent'] : currentScheme['accent-2'];
+    if (index === 3) { // 2023 год - всегда выделен синим
+      return currentScheme['accent'];
     } else { // 2020-2022 - оранжевый
-      return hoveredIndex === null ? currentScheme['primary'] : 
-             hoveredIndex === index ? currentScheme['primary'] : currentScheme['primary-2'];
+      return currentScheme['primary'];
     }
   };
 
@@ -54,7 +49,6 @@ const ROI2 = ({ colorScheme = 'aqua-blue-outline' }: ROI2Props) => {
             <BarChart
               data={marketData}
               margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
-              onMouseLeave={() => setHoveredIndex(null)}
               barCategoryGap="2"
             >
               <XAxis 
@@ -70,7 +64,7 @@ const ROI2 = ({ colorScheme = 'aqua-blue-outline' }: ROI2Props) => {
                       textAnchor="middle"
                       fontSize={12}
                       fill={currentScheme['main-text']}
-                      fontWeight={hoveredIndex === index ? "bold" : "normal"}
+                      fontWeight={index === 3 ? "bold" : "normal"}
                     >
                       {payload.value}
                     </text>
@@ -94,7 +88,7 @@ const ROI2 = ({ colorScheme = 'aqua-blue-outline' }: ROI2Props) => {
                         textAnchor="middle"
                         fontSize={12}
                         fill={currentScheme['main-text']}
-                        fontWeight={hoveredIndex === index ? "bold" : "500"}
+                        fontWeight={index === 3 ? "bold" : "500"}
                       >
                         {value}
                       </text>
@@ -105,7 +99,6 @@ const ROI2 = ({ colorScheme = 'aqua-blue-outline' }: ROI2Props) => {
                   <Cell 
                     key={`cell-${index}`} 
                     fill={getBarColor(index)}
-                    onMouseEnter={() => setHoveredIndex(index)}
                   />
                 ))}
               </Bar>
