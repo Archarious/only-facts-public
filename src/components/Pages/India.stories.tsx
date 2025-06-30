@@ -1092,8 +1092,11 @@ export const FullDashboardPage: Story = {
               isExpandable={false}
               tags={[]}
             >
-
-
+              <img
+                src="/only-facts-public/brands1.png"
+                className="w-full h-full object-cover"
+                draggable="false"
+              />
             </Card>
           </div>
         </div>
@@ -1423,12 +1426,17 @@ export const FullDashboardPage: Story = {
           />
           <Card 
             width={16}
-            height={3}
+            height={4}
             colorScheme="yellow-yellow-outline"
             outline={true}
             isExpandable={false}
             tags={[]}
           >
+            <img
+              src="/only-facts-public/brands2.png"
+              className="w-full h-full"
+              draggable="false"
+            />
           </Card>
         </div>
 
@@ -1579,7 +1587,7 @@ export const FullDashboardPage: Story = {
 
         <div>
           <div className='w-full max-w-(--sizes-max-container-width) mx-auto flex flex-col gap-10'>
-            <TypographyH2 className="mb-2">Операторы</TypographyH2>
+            <TypographyH2 className="mb-2">Платежные методы у конкурентов</TypographyH2>
             <TypographyParagraph>
               Крипту можно купить за фиат через партнёра <strong>Onramper</strong>. Ввод локальной валюты возможен через UPI, мгновенная платёжная система в Индии, позволяющая переводить деньги между счетами через мобильные приложения без ввода данных карты.
             </TypographyParagraph>
