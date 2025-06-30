@@ -125,7 +125,10 @@ const Menu = ({
             key={country.id}
             onClick={() => onCountryToggle?.(country.id)}
             className={cn(
-              'w-10 h-10 rounded-full overflow-hidden',
+              'relative w-10 h-10 rounded-full overflow-hidden transition-all duration-200',
+              'before:absolute before:inset-0 before:bg-white/0 before:transition-all before:duration-200',
+              'hover:before:bg-white/70',
+              'cursor-pointer',
               country.isActive 
                 ? 'outline-4 outline-white' 
                 : 'outline-0'

@@ -98,16 +98,16 @@ const mockMenuItems: DropdownMenuItem[] = [
 
 const mainMenu = <Menu
   countries={[
-    { id: 'in', name: 'Индия', flagUrl: '/flags/in-circle-20.png', isActive: true },
-    { id: 'uy', name: 'Уругвай', flagUrl: '/flags/uy-circle-20.png', isActive: false },
-    { id: 'mx', name: 'Мексика', flagUrl: '/flags/mx-circle-20.png', isActive: false },
-    { id: 'mt', name: 'Мальта', flagUrl: '/flags/mt-circle-20.png', isActive: false },
-    { id: 'ua', name: 'Украина', flagUrl: '/flags/ua-circle-20.png', isActive: false },
-    { id: 'ru', name: 'Россия', flagUrl: '/flags/ru-circle-20.png', isActive: false },
-    { id: 'ge', name: 'Грузия', flagUrl: '/flags/ge-circle-20.png', isActive: false },
-    { id: 'il', name: 'Израиль', flagUrl: '/flags/il-circle-20.png', isActive: false },
-    { id: 'it', name: 'Италия', flagUrl: '/flags/it-circle-20.png', isActive: false },
-    { id: 'cn', name: 'Китай', flagUrl: '/flags/cn-circle-20.png', isActive: false }
+    { id: 'in', name: 'Индия', flagUrl: '/only-facts-public/flags/in-circle-20.png', isActive: true },
+    { id: 'uy', name: 'Уругвай', flagUrl: '/only-facts-public/flags/uy-circle-20.png', isActive: false },
+    { id: 'mx', name: 'Мексика', flagUrl: '/only-facts-public/flags/mx-circle-20.png', isActive: false },
+    { id: 'mt', name: 'Мальта', flagUrl: '/only-facts-public/flags/mt-circle-20.png', isActive: false },
+    { id: 'ua', name: 'Украина', flagUrl: '/only-facts-public/flags/ua-circle-20.png', isActive: false },
+    { id: 'ru', name: 'Россия', flagUrl: '/only-facts-public/flags/ru-circle-20.png', isActive: false },
+    { id: 'ge', name: 'Грузия', flagUrl: '/only-facts-public/flags/ge-circle-20.png', isActive: false },
+    { id: 'il', name: 'Израиль', flagUrl: '/only-facts-public/flags/il-circle-20.png', isActive: false },
+    { id: 'it', name: 'Италия', flagUrl: '/only-facts-public/flags/it-circle-20.png', isActive: false },
+    { id: 'cn', name: 'Китай', flagUrl: '/only-facts-public/flags/cn-circle-20.png', isActive: false }
   ]}
   userRole="Гемблинг-оператор"
   sectionName="Содержание раздела"
