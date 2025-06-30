@@ -51,7 +51,7 @@ function MultiSelectFilters({
   const filtersList = (
     <div 
       className={cn(
-        "flex flex-wrap gap-1 p-1",
+        "flex flex-wrap gap-1 p-0",
       )}
     >
       {options.map((option) => {
@@ -62,7 +62,7 @@ function MultiSelectFilters({
             key={option.value}
             onClick={() => handleToggle(option.value)}
             className={cn(
-              "transition-all duration-200 rounded-full px-4 py-2 text-sm font-medium cursor-pointer select-none",
+              "transition-all duration-200 rounded-full py-5 px-8 text-sm font-medium cursor-pointer select-none",
               "!flex-none w-auto",
               "focus-visible:ring-0 focus-visible:outline-none"
             )}

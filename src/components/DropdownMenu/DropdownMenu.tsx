@@ -141,6 +141,24 @@ const DropdownMenu = ({
     }
   }, [isOpen, updateMenuPosition]);
 
+  React.useEffect(() => {
+    const targetElement = positionRef?.current || buttonRef.current;
+    if (targetElement) {
+      const rect = targetElement.getBoundingClientRect();
+      const isInFixed = isInsideFixedContainer(targetElement);
+      
+      if (!isInFixed) {
+        // Если находимся внутри fixed контейнера, не добавляем window.scrollY
+        const scrollOffset = isInFixed ? 0 : window.scrollY;
+        
+        setMenuPosition({
+          top: rect.bottom + scrollOffset - 40,
+          left: rect.left + window.scrollX - 20,
+        });
+      }
+    }
+  }, []);
+
   // Если используется внешнее управление без trigger
   if (isOpen !== undefined && !trigger) {
     return (
@@ -159,6 +177,10 @@ const DropdownMenu = ({
             "bg-white/45 backdrop-blur-[10px]",
             "shadow-[0px_4px_20px_rgba(0,0,0,0.15)]",
             "flex flex-col gap-0 p-10",
+            // Добавляем анимацию появления
+            "transition-opacity duration-500 ease-out",
+            "data-[open]:opacity-100 data-[open]:scale-100",
+            "data-[closed]:opacity-0 data-[closed]:scale-0",
             menuClassName
           )}
           style={{ 
@@ -167,6 +189,8 @@ const DropdownMenu = ({
             left: `${menuPosition.left}px`,
             display: isOpen ? 'flex' : 'none',
             outline: 'none',
+            // Устанавливаем transform-origin для корректного масштабирования
+            transformOrigin: 'top left',
           }}
         >
           {/* Заголовок - всегда резервируем место */}
@@ -258,6 +282,10 @@ const DropdownMenu = ({
           "bg-white/45 backdrop-blur-[10px]",
           "shadow-[0px_4px_20px_rgba(0,0,0,0.15)]",
           "flex flex-col gap-0 p-10",
+          // Добавляем анимацию появления
+          "transition-opacity duration-500 ease-out",
+          "data-[open]:opacity-100 data-[open]:scale-100 data-[open]:translate-y-0",
+          "data-[closed]:opacity-0 data-[closed]:scale-95 data-[closed]:-translate-y-2",
           menuClassName
         )}
         style={{ 
@@ -265,6 +293,8 @@ const DropdownMenu = ({
           top: `${menuPosition.top}px`,
           left: `${menuPosition.left}px`,
           outline: 'none',
+          // Устанавливаем transform-origin для корректного масштабирования
+          transformOrigin: 'top left',
         }}
       >
         {/* Заголовок - всегда резервируем место */}

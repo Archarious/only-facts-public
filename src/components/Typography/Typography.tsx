@@ -60,10 +60,10 @@ function Typography({
     <Component
       className={cn(
         size        && `text-[${size}]`,
-        family      && `font-(family-name:${family})`,
         weight      && `font-${weight}`,
         lineHeight  && `leading-${lineHeight}`,
         spacing     && `tracking-${spacing}`,
+        family && `font-(family-name:${family})`,
         'p-0 m-0',
         className,
       )}
@@ -117,6 +117,7 @@ function TypographyH1({ className, color, children, as, ...props }: BaseTypograp
       size="64px"
       color={color}
       className={className}
+      family={F_DELA_GOTHIC}
       as={as || 'h1'}
       {...props}
     >
@@ -129,6 +130,7 @@ function TypographyH2({ className, color, children, as, ...props }: BaseTypograp
   return (
     <Typography 
       size="28px"
+      family={F_DELA_GOTHIC}
       color={color}
       className={className} 
       as={as || 'h2'}
@@ -144,6 +146,7 @@ function TypographyH3({ className, color, children, as, ...props }: BaseTypograp
     <Typography 
       size="20px"
       lineHeight={F_LH_24}
+      family={F_DELA_GOTHIC}
       color={color}
       className={className}
       as={as || 'h3'}
@@ -157,7 +160,8 @@ function TypographyH3({ className, color, children, as, ...props }: BaseTypograp
 function TypographyParagraph({ className, color, children, as, ...props }: BaseTypographyProps) {
   return (
     <Typography 
-      size="18px" 
+      size="18px"
+      lineHeight={F_LH_24}
       color= {color}
       className={className}
       as={as || 'p'}

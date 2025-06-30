@@ -7,6 +7,7 @@ import {
 } from '@/components/Tiles'
 
 export interface ROIProps {
+  id?: string
   className?: string
   authorName?: string
   avatarSrc?: string
@@ -14,7 +15,8 @@ export interface ROIProps {
   customExpertComment?: string
 }
 
-const ROI = ({ 
+const ROI = ({
+  id,
   className,
   authorName = "Стася Аналитик",
   avatarSrc = '/avatar.png',
@@ -26,9 +28,9 @@ const ROI = ({
   const defaultExpertComment = "Индийский рынок прибыльный, но точные цифры сказать нельзя. Индия — это один из крупнейших рынков по численности населения. По последним данным, вовлеченность в азартные игры составляет 8–10% взрослого населения в зависимости от штата, и эти показатели демонстрируют устойчивый рост последние 3–4 года. По конкуренции рынок всё ещё не насыщен. Особенно высока маржинальность в регионах с меньшей представленностью локальных брендов."
 
   return (
-    <div className={`w-full max-w-(--sizes-max-container-width) mx-auto flex flex-col gap-10 ${className || ''}`}>
-      <div>
-        <TypographyH2 className="mb-2">Доходность и размер рынка (ROI)</TypographyH2>
+    <div id={id} className={`w-full max-w-(--sizes-max-container-width) mx-auto flex flex-col gap-10 ${className || ''}`}>
+      <div className="flex flex-col gap-10">
+        <TypographyH2>Доходность и размер рынка (ROI)</TypographyH2>
         <TypographyParagraph>
           {customDescription || defaultDescription}
         </TypographyParagraph>

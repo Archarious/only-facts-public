@@ -29,7 +29,7 @@ const PenaltiesOP = ({
       <MultiSelectFilters
         options={penaltiesOptions}
         defaultValue={['federal']}
-        colorScheme="yellow-yellow-outline"
+        colorScheme="blue-aqua"
       />
       
       <div className="flex gap-4">
