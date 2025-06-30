@@ -117,26 +117,54 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({
   }
 
   // Рендер содержимого Card (переиспользуется в модальном окне)
-  const renderCardContent = () => (
+  const renderCardContent = (isModal = false) => (
     <>
       {/* Основная область контента - центральная ячейка */}
       <div 
-        className="flex flex-col justify-between h-full row-start-2 col-start-2"
+        className={cn(
+          "flex flex-col h-full row-start-2 col-start-2",
+          isModal ? "overflow-hidden" : "justify-between"
+        )}
       >
-        <div className="flex flex-col">
-          {renderTitle()}
-          {subtitle && <p
-            className={cn(
-              'mt-4',
-              `color-${scheme['main-text']}`
-            )}>
-              {subtitle}
-            </p>
-          }
-        </div>
-        <div className="h-full">
-          {children}
-        </div>
+        {isModal ? (
+          // Модальное окно с скроллируемым контентом
+          <>
+            <div className="flex-shrink-0">
+              {renderTitle()}
+              {subtitle && <p
+                className={cn(
+                  'mt-4',
+                  `color-${scheme['main-text']}`
+                )}>
+                  {subtitle}
+                </p>
+              }
+            </div>
+            <div className="flex-1 overflow-y-auto min-h-0 mt-4">
+              <div className="pr-4">
+                {children}
+              </div>
+            </div>
+          </>
+        ) : (
+          // Обычная Card
+          <>
+            <div className="flex flex-col">
+              {renderTitle()}
+              {subtitle && <p
+                className={cn(
+                  'mt-4',
+                  `color-${scheme['main-text']}`
+                )}>
+                  {subtitle}
+                </p>
+              }
+            </div>
+            <div className="h-full">
+              {children}
+            </div>
+          </>
+        )}
       </div>
 
       {/* Правая колонка для перекрытия overflow - правая средняя ячейка (row 2, col 3) */}
@@ -153,7 +181,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({
       {(tags.length > 0 || isExpandable) && (
         <div 
           className={cn(
-            "flex items-center min-h-10",
+            "flex items-center min-h-10 flex-shrink-0",
             isExpandable ? "flex-row justify-between" : "flex-wrap gap-1"
           )}
           style={{ 
@@ -284,7 +312,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({
         onClick={isExpandable && handleCardClick}
         {...props}
       >
-        {renderCardContent()}
+        {renderCardContent(false)}
       </div>
 
       {/* Модальное окно */}
@@ -309,7 +337,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {renderCardContent()}
+            {renderCardContent(true)}
           </div>
         </>
       )}
