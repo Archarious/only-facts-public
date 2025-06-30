@@ -61,6 +61,52 @@ const Menu = ({
   onSectionClick,
   onUserClick,
 }: MenuProps) => {
+  // Добавляем состояние для управления DropdownMenu
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+
+  // Упрощенный обработчик для закрытия dropdown при любом взаимодействии
+  React.useEffect(() => {
+    if (!isDropdownOpen) return;
+
+    const closeDropdown = () => {
+      console.log('Closing dropdown due to scroll/interaction');
+      setIsDropdownOpen(false);
+    };
+
+    // Добавляем обработчики на все возможные события
+    const events = ['scroll', 'wheel', 'touchmove', 'resize'];
+    
+    events.forEach(eventName => {
+      document.addEventListener(eventName, closeDropdown, { passive: true, capture: true });
+      window.addEventListener(eventName, closeDropdown, { passive: true, capture: true });
+    });
+
+    // Также закрываем при любом клике по документу (кроме самого dropdown)
+    const handleClick = (e: MouseEvent) => {
+      console.log('Click detected, closing dropdown');
+      closeDropdown();
+    };
+
+    // Небольшая задержка перед добавлением обработчика клика
+    const timeoutId = setTimeout(() => {
+      document.addEventListener('click', handleClick, { capture: true });
+    }, 100);
+
+    return () => {
+      clearTimeout(timeoutId);
+      events.forEach(eventName => {
+        document.removeEventListener(eventName, closeDropdown, true);
+        window.removeEventListener(eventName, closeDropdown, true);
+      });
+      document.removeEventListener('click', handleClick, true);
+    };
+  }, [isDropdownOpen]);
+
+  // Обработчик изменения состояния dropdown
+  const handleDropdownChange = React.useCallback((open: boolean) => {
+    console.log('Dropdown state changing to:', open);
+    setIsDropdownOpen(open);
+  }, []);
 
   return (
     <div 
@@ -107,18 +153,19 @@ const Menu = ({
               "hover:text-(--color-palette-red-100) transition-colors",
               "hover:cursor-pointer"
             )}
-            // style={{ color: 'var(--color-palette-charcoal-100)' }}
           >
             {userRole}
           </span>
         </div>
 
-        {/* Содержание раздела */}
+        {/* Содержание раздела с внешним управлением */}
         <DropdownMenu
           trigger={(<TriggerButton>Содержание раздела</TriggerButton>)}
           title="Содержание раздела"
           items={SectionSummaryItems}
           width={260}
+          isOpen={isDropdownOpen}
+          onOpenChange={handleDropdownChange}
         />
 
         {/* Имя пользователя */}

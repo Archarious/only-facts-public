@@ -71,31 +71,68 @@ const DropdownMenu = ({
     }
   }, [positionRef, isInsideFixedContainer]);
 
-  // Обработка кликов вне меню для статического режима
+  // Универсальный обработчик закрытия меню
+  const closeMenu = React.useCallback(() => {
+    onOpenChange?.(false);
+  }, [onOpenChange]);
+
+  // Принудительно разрешаем скролл страницы при открытии меню
   React.useEffect(() => {
-    if (isOpen !== undefined && !trigger && isOpen) {
+    if (isOpen !== undefined && isOpen) {
+      // Принудительно разрешаем скролл
+      const originalOverflow = document.body.style.overflow;
+      const originalPaddingRight = document.body.style.paddingRight;
+      
+      document.body.style.overflow = 'auto';
+      document.body.style.paddingRight = originalPaddingRight;
+      
+      return () => {
+        // Восстанавливаем только если не было принудительно изменено
+        if (document.body.style.overflow === 'auto') {
+          document.body.style.overflow = originalOverflow;
+        }
+      };
+    }
+  }, [isOpen]);
+
+  // Обработка только кликов вне меню и клавиатуры
+  React.useEffect(() => {
+    if (isOpen !== undefined && isOpen) {
       const handleClickOutside = (event: MouseEvent) => {
         const target = event.target as Node;
         const menuElement = menuRef.current;
         const positionElement = positionRef?.current;
+        const buttonElement = buttonRef.current;
         
-        // Проверяем, что клик не был по меню или по элементу позиционирования
+        // Проверяем, что клик не был по меню, кнопке или элементу позиционирования
         if (
           menuElement && 
           !menuElement.contains(target) && 
-          positionElement && 
-          !positionElement.contains(target)
+          buttonElement &&
+          !buttonElement.contains(target) &&
+          (!positionElement || !positionElement.contains(target))
         ) {
-          onOpenChange?.(false);
+          closeMenu();
         }
       };
 
+      const handleKeyDown = (event: KeyboardEvent) => {
+        // Закрываем при Escape или Tab
+        if (event.key === 'Escape' || event.key === 'Tab') {
+          closeMenu();
+        }
+      };
+
+      // Добавляем только обработчики кликов и клавиатуры
       document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('keydown', handleKeyDown);
       };
     }
-  }, [isOpen, trigger, onOpenChange, positionRef]);
+  }, [isOpen, closeMenu, positionRef]);
 
   // Обновляем позицию при изменении isOpen
   React.useEffect(() => {
@@ -116,6 +153,7 @@ const DropdownMenu = ({
         <MenuItems
           ref={menuRef}
           static
+          modal={false}
           className={cn(
             "fixed z-[9999] rounded-xl",
             "bg-white/45 backdrop-blur-[10px]",
@@ -157,7 +195,7 @@ const DropdownMenu = ({
                         "data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed",
                       )}
                       onClick={() => {
-                        onOpenChange?.(false);
+                        closeMenu();
                         close();
                       }}
                     >
@@ -176,7 +214,7 @@ const DropdownMenu = ({
                       onClick={() => {
                         if (!item.disabled) {
                           item.onClick?.();
-                          onOpenChange?.(false);
+                          closeMenu();
                           close();
                         }
                       }}
@@ -213,6 +251,8 @@ const DropdownMenu = ({
       )}
 
       <MenuItems
+        ref={menuRef}
+        modal={false}
         className={cn(
           "fixed z-[9999] rounded-xl",
           "bg-white/45 backdrop-blur-[10px]",
@@ -252,7 +292,9 @@ const DropdownMenu = ({
                       "hover:cursor-pointer",
                       "data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed"
                     )}
-                    onClick={close}
+                    onClick={() => {
+                      close();
+                    }}
                   >
                     {item.label}
                   </a>
