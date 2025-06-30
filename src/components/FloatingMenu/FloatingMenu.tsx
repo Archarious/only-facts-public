@@ -63,13 +63,20 @@ const FloatingMenu = ({
     <div
       ref={floatingRef}
       className={cn(
-        'fixed top-[-10px] left-0 right-0 z-50 transition-transform duration-300 ease-in-out',
-        isVisible ? 'translate-y-10' : '-translate-y-full',
+        'fixed left-0 right-0 z-50 transition-all duration-300 ease-in-out',
         className
       )}
+      style={{
+        // Убираем все transform'ы и используем только position и opacity
+        top: isVisible ? '0px' : '-100px',
+        opacity: isVisible ? 1 : 0,
+        visibility: isVisible ? 'visible' : 'hidden',
+        // Обеспечиваем правильный стековый контекст без transforms
+        isolation: 'isolate'
+      }}
     >
       {/* Основной контейнер с отступами */}
-      <div className="relative h-[90px] max-w-[1490px] mx-auto">
+      <div className="relative h-[90px] max-w-[1490px] mx-auto mt-[10px]">
         {/* Основной желтый блок */}
         <div 
           className={cn(
@@ -78,8 +85,24 @@ const FloatingMenu = ({
             'shadow-[0px_2px_4px_rgba(156,154,0,0.35),0px_4px_20px_rgba(121,85,8,0.14)]',
             'p-11',
           )}
+          style={{
+            // Никаких transform'ов - только статичное позиционирование
+            position: 'relative',
+            zIndex: 51,
+            // Позволяем порталам выходить за границы
+            overflow: 'visible'
+          }}
         >
-          {menu}
+          {/* Контейнер для menu без каких-либо transform'ов */}
+          <div
+            style={{
+              position: 'relative',
+              zIndex: 52,
+              overflow: 'visible'
+            }}
+          >
+            {menu}
+          </div>
         </div>
       </div>
     </div>

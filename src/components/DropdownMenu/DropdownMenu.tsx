@@ -42,16 +42,34 @@ const DropdownMenu = ({
   const menuRef = React.useRef<HTMLDivElement>(null);
   const [menuPosition, setMenuPosition] = React.useState({ top: 0, left: 0 });
 
+  // Функция для проверки, находится ли элемент внутри fixed контейнера
+  const isInsideFixedContainer = React.useCallback((element: HTMLElement): boolean => {
+    let current = element.parentElement;
+    while (current && current !== document.body) {
+      const style = window.getComputedStyle(current);
+      if (style.position === 'fixed') {
+        return true;
+      }
+      current = current.parentElement;
+    }
+    return false;
+  }, []);
+
   const updateMenuPosition = React.useCallback(() => {
     const targetElement = positionRef?.current || buttonRef.current;
     if (targetElement) {
       const rect = targetElement.getBoundingClientRect();
+      const isInFixed = isInsideFixedContainer(targetElement);
+      
+      // Если находимся внутри fixed контейнера, не добавляем window.scrollY
+      const scrollOffset = isInFixed ? 0 : window.scrollY;
+      
       setMenuPosition({
-        top: rect.bottom + window.scrollY - 40,
+        top: rect.bottom + scrollOffset - 40,
         left: rect.left + window.scrollX - 20,
       });
     }
-  }, [positionRef]);
+  }, [positionRef, isInsideFixedContainer]);
 
   // Обработка кликов вне меню для статического режима
   React.useEffect(() => {
