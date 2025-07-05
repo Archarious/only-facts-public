@@ -316,7 +316,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({
           className
         )}
         style={cardStyle}
-        onClick={isExpandable && handleCardClick}
+        onClick={isExpandable ? handleCardClick : undefined}
         {...props}
       >
         {renderCardContent(false)}

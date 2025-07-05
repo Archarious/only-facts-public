@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import { cn } from '@/lib/utils'
-import { Logo } from '@/lib/icons'
 import { Card } from '@/components/Card'
 
 export interface HeroProps {
@@ -22,12 +21,6 @@ function Hero({
   countryTitle = "Индия",
   menu,
   ref,
-  sectionLinks = [
-    { id: 'current-state', label: 'Текущее состояние', href: '#current-state' },
-    { id: 'key-changes', label: 'Ключевые изменения', href: '#key-changes' },
-    { id: 'market-analysis', label: 'Анализ рынка', href: '#market-analysis' },
-    { id: 'forecast', label: 'Прогноз', href: '#forecast' },
-  ],
   ...props
 }: HeroProps) {
 
@@ -35,10 +28,6 @@ function Hero({
     backgroundColor: 'var(--color-palette-gold-100)',
     minHeight: '280px',
     borderRadius: 'var(--radius-xl)',
-  }
-
-  const containerStyle: React.CSSProperties = {
-    maxWidth: 'calc(var(--sizes-desktop-min) - 2 * var(--sizes-gutter))', // 1291px
   }
 
   const contentContainerStyle: React.CSSProperties = {

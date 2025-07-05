@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { cn } from '@/lib/utils'
-import { getColorScheme, getAvailableSchemes, type ColorScheme, type ColorSchemeName } from '@/lib/color-schemes'
+import { getColorScheme, getAvailableSchemes, type ColorScheme } from '@/lib/color-schemes'
 
 export interface ColorSchemeDemoProps {
   className?: string
@@ -82,7 +82,7 @@ function ColorSchemeDemo({ className }: ColorSchemeDemoProps) {
           
           <p className="mb-4">
             Это пример текста в выбранной цветовой схеме. 
-            Цвета автоматически применяются из схемы "{selectedScheme}".
+            Цвета автоматически применяются из схемы &quot;{selectedScheme}&quot;.
           </p>
           
           <div className="flex items-center gap-2 mb-4">

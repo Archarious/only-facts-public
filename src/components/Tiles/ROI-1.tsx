@@ -6,7 +6,7 @@ import { getColorScheme } from '@/lib/color-schemes';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, LabelList } from 'recharts';
 
 export interface ROI1Props {
-  colorScheme?: ColorScheme;
+  colorScheme?: ColorScheme | string;
 }
 
 const roiData = [
@@ -24,7 +24,7 @@ const ROI1 = ({ colorScheme = 'red-aqua' }: ROI1Props) => {
 
   return (
     <Card
-      colorScheme={colorScheme}
+      colorScheme={colorScheme as string}
       width={8}
       height={6}
     >

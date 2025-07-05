@@ -86,4 +86,3 @@ function MultiSelectFilters({
 }
 
 export { MultiSelectFilters }
-export type { MultiSelectFiltersProps, MultiSelectOption }

@@ -7,7 +7,7 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, LabelList } fro
 import { useState } from 'react';
 
 export interface Ethn2Props {
-  colorScheme?: ColorScheme;
+  colorScheme?: ColorScheme | string;
 }
 
 const corruptionData = [
@@ -29,7 +29,7 @@ const Ethn2 = ({ colorScheme = 'gray-aqua' }: Ethn2Props) => {
 
   return (
     <Card
-      colorScheme={colorScheme}
+      colorScheme={colorScheme as string}
       width={8}
       height={6}
     >

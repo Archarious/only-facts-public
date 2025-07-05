@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { Logo } from '@/lib/icons';
 
@@ -36,7 +37,7 @@ const SectionSummaryItems: DropdownMenuItem[] = [
 ];
 
 const TriggerButton = ({ children }: { children: React.ReactNode }) => (
-  <button
+  <span
     className={cn(
       "text-sm font-black leading-[22px]",
       "text-(--color-palette-charcoal-100)",
@@ -48,17 +49,15 @@ const TriggerButton = ({ children }: { children: React.ReactNode }) => (
     }}
   >
     {children}
-  </button>
+  </span>
 );
 
 const Menu = ({
   countries = [],
   userRole = "Гемблинг-оператор",
-  sectionName = "Содержание раздела",
   userName = "Имя Пользователя",
   className,
   onCountryToggle,
-  onSectionClick,
   onUserClick,
 }: MenuProps) => {
   // Добавляем состояние для управления DropdownMenu
@@ -82,7 +81,7 @@ const Menu = ({
     });
 
     // Также закрываем при любом клике по документу (кроме самого dropdown)
-    const handleClick = (e: MouseEvent) => {
+    const handleClick = () => {
       console.log('Click detected, closing dropdown');
       closeDropdown();
     };
@@ -135,10 +134,12 @@ const Menu = ({
             )}
             title={country.name}
           >
-            <img
+            <Image
               src={country.flagUrl}
               alt={`Флаг ${country.name}`}
               className="w-full h-full object-cover"
+              width={40}
+              height={40}
             />
           </button>
         ))}

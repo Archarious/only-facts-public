@@ -2,15 +2,15 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 interface TypographyProps {
-  size: string
-  family: string        // 'Geologica' | 'Dela Gothic One'
-  weight: 'normal' | 'light',
-  lineHeight: string    // 'none' | '[??px]'
-  spacing: string       //0, [?.?px]
-  color: string
-  className: string
-  children: React.ReactNode
-  as: React.ElementType
+  size?: string
+  family?: string        // 'Geologica' | 'Dela Gothic One'
+  weight?: 'normal' | 'light',
+  lineHeight?: string    // 'none' | '[??px]'
+  spacing?: string       //0, [?.?px]
+  color?: string
+  className?: string
+  children?: React.ReactNode
+  as?: React.ElementType
 }
 
 const F_GEOLOGICA = '--font-geologica';
@@ -83,13 +83,13 @@ interface BaseTypographyProps {
   as?: React.ElementType
 }
 
-function CaptionTitle({ className, color, children, as, ...props }: BaseTypographyProps) {
+function CaptionTitle({ className = '', color = 'inherit', children, as, ...props }: BaseTypographyProps) {
   return (
     <Typography
       size="14px"
       color={color}
       className={className}
-      component={as || 'div'}
+      as={as || 'div'}
       {...props}
     >
       {children}
@@ -97,13 +97,13 @@ function CaptionTitle({ className, color, children, as, ...props }: BaseTypograp
   )
 }
 
-function CaptionContent({ className, color, children, as, ...props }: BaseTypographyProps) {
+function CaptionContent({ className = '', color = 'inherit', children, as, ...props }: BaseTypographyProps) {
   return (
     <Typography
       size="14px"
       color={color}
       className={className}
-      component={as || 'div'}
+      as={as || 'div'}
       {...props}
     >
       {children}

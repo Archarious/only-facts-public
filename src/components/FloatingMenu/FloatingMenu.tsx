@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 
 export interface FloatingMenuProps {
   menu: React.ReactNode;
-  heroRef?: React.RefObject<HTMLElement>;
+  heroRef?: React.RefObject<HTMLElement | null>;
   threshold?: number;
   className?: string;
 }

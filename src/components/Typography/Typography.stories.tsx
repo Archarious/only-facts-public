@@ -21,10 +21,6 @@ const meta: Meta<typeof Typography> = {
     }
   },
   argTypes: {
-    variant: {
-      control: { type: 'select' },
-      options: ['h1', 'h2', 'h3', 'paragraph']
-    },
     as: {
       control: { type: 'text' }
     }
@@ -36,7 +32,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    variant: 'h1',
     children: 'Пример типографики'
   }
 }

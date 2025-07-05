@@ -46,7 +46,7 @@ const SampleMenu = () => (
 );
 
 // Мок Hero секции
-const HeroSection = ({ heroRef }: { heroRef: React.RefObject<HTMLElement> }) => (
+const HeroSection = ({ heroRef }: { heroRef: React.RefObject<HTMLElement | null> }) => (
   <section 
     ref={heroRef}
     className="bg-gradient-to-r from-blue-600 to-blue-700 text-white h-96 flex items-center justify-center"

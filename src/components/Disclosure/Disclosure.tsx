@@ -12,7 +12,7 @@ import { TwoColorIcon } from '@/lib/icons/two-color-icon';
 
 // TODO: Плохо ипортировать компонент в компонент. 
 // Убрать потом
-import { TypographyH3, DisclosureTitle, TypographyH3NEW } from '@/components/Typography';
+import { TypographyH3NEW } from '@/components/Typography';
 
 export interface DisclosureProps {
   title: string;
@@ -29,7 +29,6 @@ export interface DisclosureProps {
 
 const Disclosure = ({
   title,
-  subtitle,
   children,
   className,
   buttonClassName,
@@ -88,7 +87,7 @@ const Disclosure = ({
     if (!icon) return null;
 
     if (isTwoColorIcon(icon)) {
-      return React.cloneElement(icon as React.ReactElement, {
+      return React.cloneElement(icon as React.ReactElement<{ size?: number }>, {
         size: currentIconSize,
       });
     }
@@ -180,19 +179,23 @@ const Disclosure = ({
     return () => clearTimeout(timer);
   }, [children, measureContentHeight]);
 
+  // Обновляем локальное состояние при изменении open
+  const [currentOpen, setCurrentOpen] = React.useState(defaultOpen);
+
   return (
-    <HeadlessDisclosure
-      className={cn(
-        'w-full text-left max-w-(--sizes-max-container-width)',
-        className)}
-      defaultOpen={defaultOpen}
-      {...props}
-    >
+    <div className={cn(
+      'w-full text-left max-w-(--sizes-max-container-width)',
+      className)}>
+      <HeadlessDisclosure
+        defaultOpen={defaultOpen}
+        {...props}
+      >
       {({ open }) => {
         // Обновляем локальное состояние при изменении open
-        React.useEffect(() => {
+        if (open !== currentOpen) {
+          setCurrentOpen(open);
           setIsOpen(open);
-        }, [open]);
+        }
 
         return (
           <HeadlessDisclosure.Button
@@ -221,7 +224,7 @@ const Disclosure = ({
                 isClamped && 'h-12',
               )}
             >
-              <TypographyH3NEW
+              <div 
                 className={cn(
                   'overflow-hidden',
                   isClamped && `line-clamp-${clampLines}`,
@@ -230,8 +233,10 @@ const Disclosure = ({
                   color: scheme['title-text'],
                 }}
               >
-                {title}
-              </TypographyH3NEW>
+                <TypographyH3NEW>
+                  {title}
+                </TypographyH3NEW>
+              </div>
 
             </div>
             <HeadlessDisclosure.Panel
@@ -287,6 +292,7 @@ const Disclosure = ({
         );
       }}
     </HeadlessDisclosure>
+    </div>
   );
 }
 

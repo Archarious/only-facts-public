@@ -112,7 +112,7 @@ const Bubbles = ({
 
   // Создаем title компонент для Card
   const titleComponent = title ? (
-    <TypographyH3 style={{ color: currentScheme['title-text'] }}>
+    <TypographyH3 color={currentScheme['title-text']}>
       {title}
     </TypographyH3>
   ) : undefined;

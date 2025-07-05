@@ -20,5 +20,4 @@ export type IconName = keyof typeof Icons
 
 export { TwoColorIcon } from './two-color-icon';
 export type { TwoColorIconProps } from './two-color-icon';
-export type { IconName } from './icon-registry';
 export { iconRegistry } from './icon-registry';

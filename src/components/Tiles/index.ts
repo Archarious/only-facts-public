@@ -12,7 +12,7 @@ export { Bubbles } from './Bubbles';
 export type { ROI1Props } from './ROI-1';
 export type { ROI2Props } from './ROI-2';
 export type { ROI3Props } from './ROI-3';
-export type { Ethn1Props } from './Ethn-1';
+export type { ROI1Props as Ethn1Props } from './Ethn-1';
 export type { Ethn2Props } from './Ethn-2';
 export type { Ethn3Props } from './Ethn-3';
 export type { Ethn4Props } from './Ethn-4';

@@ -7,7 +7,7 @@ import { getColorScheme } from '@/lib/color-schemes';
 import { TileTypography, TypographyH3NEW } from '@/components/Typography';
 
 export interface ROI3Props {
-  colorScheme?: ColorScheme;
+  colorScheme?: ColorScheme | string;
 }
 
 const marketData = [
@@ -33,7 +33,7 @@ const ROI3 = ({ colorScheme = 'banana' }: ROI3Props) => {
 
   return (
     <Card
-      colorScheme={colorScheme}
+      colorScheme={colorScheme as string}
       width={24}
       height={6}
     >
@@ -47,7 +47,7 @@ const ROI3 = ({ colorScheme = 'banana' }: ROI3Props) => {
           {marketData.map((item, index) => (
             <div key={index} className="flex-1 flex flex-col justify-between">
               <TileTypography.H1 
-                style={{ color: currentScheme['primary'] }}
+                color={currentScheme['primary']}
               >
                 {item.value}
               </TileTypography.H1>

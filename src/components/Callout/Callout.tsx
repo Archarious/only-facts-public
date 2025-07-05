@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 export interface CalloutProps {
@@ -27,10 +28,12 @@ function Callout({
         <div className="flex flex-col gap-2 items-center">
           {/* Аватар */}
           <div className="w-[72px] h-[72px] rounded-full overflow-hidden bg-gray-200">
-            <img
+            <Image
               src={avatarSrc}
               alt={authorName}
               className="w-full h-full object-cover"
+              width={72}
+              height={72}
               onError={(e) => {
                 // Fallback при ошибке загрузки изображения
                 const target = e.target as HTMLImageElement;

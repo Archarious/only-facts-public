@@ -5,7 +5,7 @@ import { TypographyH3, CaptionTitle, CaptionContent } from '@/components/Typogra
 import type { ColorSchemeName } from '@/lib/color-schemes';
 import { getColorScheme } from '@/lib/color-schemes';
 import { ScatterChart, Scatter, ResponsiveContainer, Cell, XAxis, YAxis, ZAxis } from 'recharts';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
 type BubbleDataType = {
   x: number;
@@ -27,7 +27,7 @@ type ControlItem = {
   label: string;
   value: string | boolean;
   options?: string[];
-  onChange: (value: any) => void;
+  onChange: (value: string | boolean) => void;
 };
 
 export interface BubbleChartProps {
@@ -52,30 +52,12 @@ const BubbleChart = ({
   height = 8,
   title,
   text,
-  maxBubbleSize = 100,
-  minBubbleSize = 20,
 }: BubbleChartProps) => {
   const currentScheme = getColorScheme(colorScheme);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Находим min/max значения для нормализации размеров
-  const zValues = data.map(d => d.z);
-  const maxZ = Math.max(...zValues, 1);
-  const minZ = Math.min(...zValues, 0);
-
-  // Функция для получения радиуса пузыря на основе значения z
-  const getBubbleRadius = (z: number): number => {
-    if (maxZ === minZ) return maxBubbleSize / 2;
-    const ratio = (z - minZ) / (maxZ - minZ);
-    return (minBubbleSize + ratio * (maxBubbleSize - minBubbleSize)) / 2;
-  };
-
-  // Находим максимальный радиус для выравнивания
-  const maxRadius = getBubbleRadius(maxZ);
-
   // Преобразуем данные - Y позиция = радиус пузыря, чтобы нижние границы были на линии y=0
   const chartData = data.map((item, index) => {
-    const radius = getBubbleRadius(item.z);
     return {
       ...item,
       x: index,
@@ -86,7 +68,7 @@ const BubbleChart = ({
 
   // Создаем title компонент для Card
   const titleComponent = title ? (
-    <TypographyH3 style={{ color: currentScheme['title-text'] }}>
+    <TypographyH3 color={currentScheme['title-text']}>
       {title}
     </TypographyH3>
   ) : undefined;
@@ -97,12 +79,12 @@ const BubbleChart = ({
 
     return (
       <div className="space-y-3 mb-6">
-        <CaptionTitle style={{ color: currentScheme['title-text'] }}>
+        <CaptionTitle color={currentScheme['title-text']}>
           Контролы
         </CaptionTitle>
         {controls.map((control, index) => (
           <div key={index} className="flex items-center justify-between">
-            <CaptionContent style={{ color: currentScheme['main-text'] }}>
+            <CaptionContent color={currentScheme['main-text']}>
               {control.label}
             </CaptionContent>
             {control.type === 'toggle' ? (
@@ -150,7 +132,7 @@ const BubbleChart = ({
 
     return (
       <div className="space-y-2">
-        <CaptionTitle style={{ color: currentScheme['title-text'] }}>
+        <CaptionTitle color={currentScheme['title-text']}>
           Легенда
         </CaptionTitle>
         <div className="space-y-2">
@@ -161,13 +143,13 @@ const BubbleChart = ({
                 style={{ backgroundColor: item.color }}
               />
               <div className="flex-1">
-                <CaptionContent style={{ color: currentScheme['main-text'] }}>
+                <CaptionContent color={currentScheme['main-text']}>
                   {item.name}
                 </CaptionContent>
                 {item.value && (
                   <CaptionContent 
                     className="text-xs opacity-70"
-                    style={{ color: currentScheme['main-text'] }}
+                    color={currentScheme['main-text']}
                   >
                     {item.value}
                   </CaptionContent>

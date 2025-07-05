@@ -6,7 +6,7 @@ import { getColorScheme } from '@/lib/color-schemes';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, LabelList } from 'recharts';
 
 export interface ROI2Props {
-  colorScheme?: ColorScheme;
+  colorScheme?: ColorScheme | string;
 }
 
 const marketData = [
@@ -33,7 +33,7 @@ const ROI2 = ({ colorScheme = 'aqua-blue-outline' }: ROI2Props) => {
 
   return (
     <Card
-      colorScheme={colorScheme}
+      colorScheme={colorScheme as string}
       width={16}
       height={6}
       outline={true}

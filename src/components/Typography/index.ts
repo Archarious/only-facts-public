@@ -12,4 +12,4 @@ export {
   ContentTypography,
   MobileTypography,
 } from './Typography'
-export type { TypographyProps, BaseTypographyProps, CaptionTitleProps, CaptionContentProps } from './Typography'
+export type { TypographyProps, BaseTypographyProps } from './Typography'

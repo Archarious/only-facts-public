@@ -19,11 +19,11 @@ export interface DropdownMenuProps {
   className?: string;
   menuClassName?: string;
   width?: number;
-  as?: React.ElementType | string;
+  as?: React.ElementType;
   // Пропсы для внешнего управления
   isOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
-  positionRef?: React.RefObject<HTMLElement>;
+  positionRef?: React.RefObject<HTMLElement | null>;
 }
 
 const DropdownMenu = ({
@@ -157,7 +157,7 @@ const DropdownMenu = ({
         });
       }
     }
-  }, []);
+  }, [isInsideFixedContainer, positionRef]);
 
   // Если используется внешнее управление без trigger
   if (isOpen !== undefined && !trigger) {
@@ -165,8 +165,6 @@ const DropdownMenu = ({
       <Menu 
         as="div" 
         className={cn("relative inline-block text-left", className)}
-        open={isOpen}
-        onOpenChange={onOpenChange}
       >
         <MenuItems
           ref={menuRef}
@@ -260,8 +258,6 @@ const DropdownMenu = ({
     <Menu 
       as="div" 
       className={cn("relative inline-block text-left", className)}
-      open={isOpen}
-      onOpenChange={onOpenChange}
     >
       {trigger && (
         <MenuButton 

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { Accordion, AccordionItem } from './Accordion'
-import { Article } from '@/components/Article';
+import { Article } from '@/components.old/Article/Article';
 
 const meta: Meta<typeof Accordion> = {
   title: 'Components/Accordion',
@@ -187,7 +187,7 @@ export const DarkTheme: Story = {
     backgrounds: { default: 'dark' }
   },
   decorators: [
-    (Story) => (
+    (Story: React.ComponentType) => (
       <div className="dark">
         <Story />
       </div>

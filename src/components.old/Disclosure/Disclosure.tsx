@@ -27,7 +27,6 @@ const Disclosure = ({
   contentClassName,
   defaultOpen = false,
   clampLines = 1,
-  icon,
   ...props
 }: DisclosureProps) => {
   const [isClamped, setIsClamped] = React.useState(!defaultOpen);

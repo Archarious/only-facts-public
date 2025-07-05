@@ -14,7 +14,6 @@ export function BaseIcon({
   width,
   height,
   className,
-  color = 'currentColor',
   fill = 'none',
   stroke = 'currentColor',
   strokeWidth = 2,

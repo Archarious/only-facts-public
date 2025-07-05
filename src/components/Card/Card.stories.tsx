@@ -31,7 +31,7 @@ const meta: Meta<typeof Card> = {
       control: { type: 'boolean' },
     },
     tags: {
-      control: { type: 'array' },
+      control: { type: 'object' },
       description: 'Массив тегов, отображаемых внизу карточки'
     }
   }

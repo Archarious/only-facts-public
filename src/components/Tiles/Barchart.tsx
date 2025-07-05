@@ -154,7 +154,7 @@ const Barchart = ({
                       textAnchor="middle"
                       fontSize={12}
                       fill={currentScheme['main-text']}
-                      fontWeight={data[index]?.accent ? "bold" : "300"}
+                      fontWeight={typeof index === 'number' && data[index]?.accent ? "bold" : "300"}
                     >
                       {value}
                     </text>

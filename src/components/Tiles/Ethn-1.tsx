@@ -7,7 +7,7 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, LabelList } fro
 import { useState } from 'react';
 
 export interface ROI1Props {
-  colorScheme?: ColorScheme;
+  colorScheme?: ColorScheme | string;
 }
 
 const roiData = [
@@ -30,7 +30,7 @@ const Ethn1 = ({ colorScheme = 'aqua-white' }: ROI1Props) => {
 
   return (
     <Card
-      colorScheme={colorScheme}
+      colorScheme={colorScheme as string}
       width={8}
       height={6}
     >

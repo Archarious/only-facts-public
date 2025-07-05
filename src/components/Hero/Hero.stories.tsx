@@ -66,16 +66,6 @@ const meta: Meta<typeof Hero> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-
-const dropdownMenu = (
-  <DropdownMenu
-    trigger={<MenuTrigger>Содержание раздела</MenuTrigger>}
-    title="Содержание раздела"
-    items={mockMenuItems}
-    width={240}
-  />
-)
-
 const mainMenu = (
   <Menu
     countries={[

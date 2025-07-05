@@ -42,11 +42,6 @@ const meta: Meta<typeof DropdownMenu> = {
       control: false,
       description: 'Массив элементов меню'
     },
-    align: {
-      control: 'select',
-      options: ['left', 'right'],
-      description: 'Выравнивание меню относительно триггера'
-    },
     width: {
       control: { type: 'range', min: 180, max: 400, step: 20 },
       description: 'Ширина меню в пикселях'
@@ -63,7 +58,6 @@ export const Default: Story = {
     trigger: <TriggerButton>Содержание раздела</TriggerButton>,
     title: 'Содержание раздела',
     items: mockMenuItems,
-    align: 'right',
     width: 240
   }
 };
@@ -73,7 +67,6 @@ export const WithoutTitle: Story = {
   args: {
     trigger: <TriggerButton>Меню</TriggerButton>,
     items: mockMenuItems.slice(0, 4),
-    align: 'right',
     width: 220
   }
 };
@@ -89,7 +82,6 @@ export const WithClickHandlers: Story = {
       { id: '3', label: 'Копировать', onClick: () => alert('Копирование') },
       { id: '4', label: 'Отключенный элемент', disabled: true },
     ],
-    align: 'right',
     width: 200
   }
 };
@@ -133,6 +125,7 @@ export const ExternalControl: Story = {
   render: () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
+    const positionRef = React.useRef<HTMLElement>(null);
 
     return (
       <div className="relative">
@@ -151,7 +144,7 @@ export const ExternalControl: Story = {
           width={260}
           isOpen={isMenuOpen}
           onOpenChange={setIsMenuOpen}
-          positionRef={buttonRef}
+          positionRef={positionRef}
         />
       </div>
     )

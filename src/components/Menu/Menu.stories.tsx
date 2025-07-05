@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Menu } from '@/components/Menu/Menu';
 import type { Country } from '@/components/Menu/Menu';
-import { DropdownMenu } from '@/components/DropdownMenu/DropdownMenu';
-import type { DropdownMenuItem } from '@/components/DropdownMenu/DropdownMenu';
 
 // Мок данные стран с флагами
 const mockCountries: Country[] = [
@@ -18,22 +16,6 @@ const mockCountries: Country[] = [
   { id: 'cn', name: 'Китай', flagUrl: 'https://flagcdn.com/w40/cn.png', isActive: false }
 ];
 
-const Logo = () => (
-  <div className="text-2xl font-bold text-blue-600">
-    OnlyFacts
-  </div>
-);
-
-// Данные для выпадающего меню
-const sectionMenuItems: DropdownMenuItem[] = [
-  { id: '1', label: 'Доходность рынка', href: '#revenue' },
-  { id: '2', label: 'Регуляторы', href: '#regulators' },
-  { id: '3', label: 'Поисковые запросы', href: '#search' },
-  { id: '4', label: 'Лицензии', href: '#licenses' },
-  { id: '5', label: 'Партнеры и конкуренты', href: '#partners' },
-  { id: '6', label: 'Инсайты', href: '#insights' },
-];
-
 const meta: Meta<typeof Menu> = {
   title: 'Components/Menu',
   component: Menu,
@@ -46,10 +28,6 @@ const meta: Meta<typeof Menu> = {
     }
   },
   argTypes: {
-    logo: {
-      control: false,
-      description: 'React элемент логотипа'
-    },
     countries: {
       control: false,
       description: 'Массив стран с флагами'
@@ -91,7 +69,6 @@ type Story = StoryObj<typeof meta>;
 // Основная история
 export const Default: Story = {
   args: {
-    logo: <Logo />,
     countries: mockCountries,
     userRole: 'Гемблинг-оператор',
     sectionName: 'Содержание раздела',
@@ -102,7 +79,6 @@ export const Default: Story = {
 // Основная история
 export const Colored: Story = {
   args: {
-    logo: <Logo />,
     countries: mockCountries,
     userRole: 'Гемблинг-оператор',
     sectionName: 'Содержание раздела',
